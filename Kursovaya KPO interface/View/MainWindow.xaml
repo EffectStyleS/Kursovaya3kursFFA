@@ -1,0 +1,21 @@
+﻿<Window x:Class="Kursovaya_KPO_interface.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursovaya_KPO_interface.ViewModel"
+        mc:Ignorable="d"
+        Height="600" Width="1100" 
+        x:Name="StartWindow"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Window.DataContext>
+        <local:MainWindowViewModel></local:MainWindowViewModel>
+    </Window.DataContext>
+    
+    <Frame Source="StartMenu.xaml" NavigationUIVisibility="Hidden"/>
+
+</Window>

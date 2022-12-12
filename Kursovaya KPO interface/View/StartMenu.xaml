@@ -1,0 +1,158 @@
+﻿<Page x:Class="Kursovaya_KPO_interface.View.StartMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Kursovaya_KPO_interface.ViewModel"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1100"
+      ShowsNavigationUI="False">
+
+    <Page.DataContext>
+        <local:StartMenuViewModel></local:StartMenuViewModel>
+    </Page.DataContext>
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="460*"></ColumnDefinition>
+            <ColumnDefinition Width="640*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--Left Side Start Menu-->
+        <Border CornerRadius="10 0 0 10"
+                BorderThickness="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                    <GradientStop Color="#c4c4c4"  Offset="0"/>
+                    <GradientStop Color="#ffffff"  Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <TextBlock x:Name="mainProjectName"
+                   Grid.Column="0"
+                   FontSize="80"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextWrapping="Wrap"
+                   IsEnabled="False"
+                   Style="{StaticResource BaseTextBlockStyle}">
+                <Run Text="Family Finance"/>
+                <LineBreak/>
+                <Run Text="Analysis"/>
+            </TextBlock>
+
+        </Border>
+
+        <!--Authorezation Side Start Menu-->
+        <Border Grid.Column="1" CornerRadius="0 10 10 0">
+            <Border.Background>
+                <SolidColorBrush Color="#ffffff"/>
+            </Border.Background>
+
+            <StackPanel>
+
+                <TextBlock Text="Авторизация" 
+                           FontSize="36" 
+                           HorizontalAlignment="Center"
+                           Margin="0,105,0,0"
+                           Style="{StaticResource BaseTextBlockStyle}">
+                </TextBlock>
+
+                <Separator Margin="150,20,150,20">
+                    
+                </Separator>
+
+                <Border CornerRadius="10" 
+                        Margin="160 10 150 0"
+                        BorderBrush="Black"
+                        BorderThickness="0" >
+
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
+                            <GradientStop Color="#c4c4c4"  Offset="0"/>
+                            <GradientStop Color="#ffffff"  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <TextBox x:Name="textBoxLogin" 
+                             Text="Логин" 
+                             FontSize="32" 
+                             FontFamily="Montserrat"
+                             FontWeight="Light"
+                             Background="Transparent"
+                             Foreground="#a2a2a2"
+                             BorderBrush="{x:Null}"
+                             Padding="10 3 3 0" GotFocus="Log_GotFocus"
+                             />
+                </Border>
+
+                <Border 
+                        CornerRadius="10" 
+                        Margin="160 30 150 0"
+                        BorderBrush="Black"
+                        BorderThickness="0">
+
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
+                            <GradientStop Color="#c4c4c4"  Offset="0"/>
+                            <GradientStop Color="#ffffff"  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <PasswordBox 
+                            Password="Пароль"
+                            PasswordChar="*"
+                            FontSize="32"
+                            FontFamily="Montserrat"
+                            FontWeight="Light"
+                            Background="Transparent"
+                            Foreground="#a2a2a2"
+                            BorderBrush="{x:Null}"
+                            Padding="10 3 0 0" GotFocus="PasswordBox_GotFocus">
+                    </PasswordBox>
+
+                </Border>
+
+                <Border CornerRadius="10" 
+                        Margin="220 40 250 0"
+                        BorderBrush="{x:Null}">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button Content="Вход"
+                            Click="ButtonStartEnter_Click"
+                            Padding="5"  
+                            Style="{StaticResource BaseButtonStyle}">
+                    </Button>
+                </Border>
+
+
+                <Border CornerRadius="10 0 10 0" 
+                        VerticalAlignment="Bottom"
+                        Margin="450 143 0 0"
+                        BorderBrush="{x:Null}">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Выход"
+                            Click="ButtonExit_Click"
+                            Padding="7"
+                            Style="{StaticResource BaseButtonStyle}">
+                    </Button>
+
+                </Border>
+
+            </StackPanel>
+
+        </Border>
+
+    </Grid>
+    
+</Page>

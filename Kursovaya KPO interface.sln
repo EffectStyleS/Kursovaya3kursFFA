@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kursovaya KPO interface", "Kursovaya KPO interface\Kursovaya KPO interface.csproj", "{748A62B9-4B65-490D-A678-56FCCDB7EE4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kursovaya DAL", "Kursovaya DAL\Kursovaya DAL.csproj", "{85F32D02-3114-4BE5-84AC-E08D60120F13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{748A62B9-4B65-490D-A678-56FCCDB7EE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{748A62B9-4B65-490D-A678-56FCCDB7EE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{748A62B9-4B65-490D-A678-56FCCDB7EE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85F32D02-3114-4BE5-84AC-E08D60120F13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85F32D02-3114-4BE5-84AC-E08D60120F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85F32D02-3114-4BE5-84AC-E08D60120F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85F32D02-3114-4BE5-84AC-E08D60120F13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

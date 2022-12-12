@@ -55,41 +55,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BudgetMenu.xaml.cs">
+    <Compile Include="Infrastructure\RelayCommand.cs" />
+    <Compile Include="ViewModel\BudgetMenuViewModel.cs" />
+    <Compile Include="ViewModel\ExpensesViewModel.cs" />
+    <Compile Include="ViewModel\IncomesViewModel.cs" />
+    <Compile Include="ViewModel\MainMenuViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\PlanndexExpensesViewModel.cs" />
+    <Compile Include="ViewModel\PlannedIncomesViewModel.cs" />
+    <Compile Include="ViewModel\StartMenuViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\BudgetMenu.xaml.cs">
       <DependentUpon>BudgetMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Expenses.xaml.cs">
+    <Compile Include="View\Expenses.xaml.cs">
       <DependentUpon>Expenses.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Incomes.xaml.cs">
+    <Compile Include="View\Incomes.xaml.cs">
       <DependentUpon>Incomes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlannedExpenses.xaml.cs">
+    <Compile Include="View\PlannedExpenses.xaml.cs">
       <DependentUpon>PlannedExpenses.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlannedIncomes.xaml.cs">
+    <Compile Include="View\PlannedIncomes.xaml.cs">
       <DependentUpon>PlannedIncomes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StartMenu.xaml.cs">
+    <Compile Include="View\StartMenu.xaml.cs">
       <DependentUpon>StartMenu.xaml</DependentUpon>
     </Compile>
-    <Page Include="BudgetMenu.xaml">
+    <Page Include="View\BudgetMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Expenses.xaml">
+    <Page Include="View\Expenses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Incomes.xaml">
+    <Page Include="View\Incomes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainMenu.xaml">
+    <Page Include="View\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,22 +107,22 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainMenu.xaml.cs">
+    <Compile Include="View\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PlannedExpenses.xaml">
+    <Page Include="View\PlannedExpenses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PlannedIncomes.xaml">
+    <Page Include="View\PlannedIncomes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StartMenu.xaml">
+    <Page Include="View\StartMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,6 +152,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kursovaya DAL\Kursovaya DAL.csproj">
+      <Project>{85f32d02-3114-4be5-84ac-e08d60120f13}</Project>
+      <Name>Kursovaya DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

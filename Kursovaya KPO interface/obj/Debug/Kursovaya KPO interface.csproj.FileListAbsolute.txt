@@ -1,31 +1,32 @@
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.csproj.AssemblyReference.cache
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.csproj.SuggestedBindingRedirects.cache
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\MainWindow.g.cs
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\App.g.cs
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface_MarkupCompile.cache
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface_MarkupCompile.lref
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Kursovaya KPO interface.exe.config
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Kursovaya KPO interface.exe
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Kursovaya KPO interface.pdb
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\MainWindow.baml
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.g.resources
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya_KPO_interface.Properties.Resources.resources
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.csproj.GenerateResource.cache
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.csproj.CoreCompileInputs.cache
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.exe
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.pdb
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\MainMenu.g.cs
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\MainMenu.baml
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\StartMenu.g.cs
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\StartMenu.baml
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Incomes.g.cs
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Incomes.baml
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Expenses.g.cs
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Expenses.baml
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\BudgetMenu.g.cs
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\BudgetMenu.baml
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\PlannedIncomes.g.cs
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\PlannedIncomes.baml
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\PlannedExpenses.g.cs
-C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\PlannedExpenses.baml
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\App.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\BudgetMenu.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\Expenses.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\Incomes.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\MainMenu.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\MainWindow.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\PlannedExpenses.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\PlannedIncomes.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\StartMenu.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\BudgetMenu.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\Expenses.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\Incomes.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\MainMenu.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\MainWindow.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\PlannedExpenses.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\PlannedIncomes.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\StartMenu.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\GeneratedInternalTypeHelper.g.cs
