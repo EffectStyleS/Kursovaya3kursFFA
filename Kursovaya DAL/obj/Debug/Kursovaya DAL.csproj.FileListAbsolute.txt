@@ -1,0 +1,14 @@
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\Kursovaya DAL.dll.config
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\Kursovaya DAL.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\Kursovaya DAL.pdb
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\EntityFramework.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\EntityFramework.xml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\obj\Debug\Kursovaya DAL.csproj.AssemblyReference.cache
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\obj\Debug\Kursovaya DAL.csproj.CoreCompileInputs.cache
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\obj\Debug\Kursovaya DAL.csproj.CopyComplete
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\obj\Debug\Kursovaya DAL.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya DAL\obj\Debug\Kursovaya DAL.pdb

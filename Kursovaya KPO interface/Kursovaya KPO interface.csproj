@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -56,6 +59,40 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Infrastructure\RelayCommand.cs" />
+    <Compile Include="Model\DbDataOperation.cs" />
+    <Compile Include="Model\Interfaces\IBudgetService.cs" />
+    <Compile Include="Model\Interfaces\IDbCrud.cs" />
+    <Compile Include="Model\Interfaces\IExpenseService.cs" />
+    <Compile Include="Model\Interfaces\IExpenseTypesService.cs" />
+    <Compile Include="Model\Interfaces\IIncomeService.cs" />
+    <Compile Include="Model\Interfaces\IIncomeTypesService.cs" />
+    <Compile Include="Model\Interfaces\IPlannedExpensesService.cs" />
+    <Compile Include="Model\Interfaces\IPlannedIncomesService.cs" />
+    <Compile Include="Model\Interfaces\IReportsService.cs" />
+    <Compile Include="Model\Interfaces\ITimePeriodService.cs" />
+    <Compile Include="Model\Interfaces\IUserService.cs" />
+    <Compile Include="Model\Models\BudgetModel.cs" />
+    <Compile Include="Model\Models\ExpenseModel.cs" />
+    <Compile Include="Model\Models\ExpenseTypesModel.cs" />
+    <Compile Include="Model\Models\IncomeModel.cs" />
+    <Compile Include="Model\Models\IncomeTypesModel.cs" />
+    <Compile Include="Model\Models\PlannedExpensesModel.cs" />
+    <Compile Include="Model\Models\PlannedIncomesModel.cs" />
+    <Compile Include="Model\Models\ReportModels.cs" />
+    <Compile Include="Model\Models\TimePeriodModel.cs" />
+    <Compile Include="Model\Models\UserModel.cs" />
+    <Compile Include="Model\Services\BudgetService.cs" />
+    <Compile Include="Model\Services\ExpenseService.cs" />
+    <Compile Include="Model\Services\ExpenseTypesService.cs" />
+    <Compile Include="Model\Services\IncomeService.cs" />
+    <Compile Include="Model\Services\IncomeTypesService.cs" />
+    <Compile Include="Model\Services\PlannedExpensesService.cs" />
+    <Compile Include="Model\Services\PlannedIncomesService.cs" />
+    <Compile Include="Model\Services\ReportsService.cs" />
+    <Compile Include="Model\Services\TimePeriodService.cs" />
+    <Compile Include="Model\Services\UserService.cs" />
+    <Compile Include="Model\Util\ServiceModule.cs" />
+    <Compile Include="Util\NinjectRegistrations.cs" />
     <Compile Include="ViewModel\BudgetMenuViewModel.cs" />
     <Compile Include="ViewModel\ExpensesViewModel.cs" />
     <Compile Include="ViewModel\IncomesViewModel.cs" />
@@ -145,6 +182,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -153,9 +191,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Kursovaya DAL\Kursovaya DAL.csproj">
       <Project>{85f32d02-3114-4be5-84ac-e08d60120f13}</Project>

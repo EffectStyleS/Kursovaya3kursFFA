@@ -30,3 +30,12 @@ C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\PlannedIncomes.baml
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\View\StartMenu.baml
 C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Kursovaya DAL.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Ninject.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\EntityFramework.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Kursovaya DAL.pdb
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Kursovaya DAL.dll.config
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\Ninject.xml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\EntityFramework.xml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Debug\Kursovaya KPO interface.csproj.CopyComplete
