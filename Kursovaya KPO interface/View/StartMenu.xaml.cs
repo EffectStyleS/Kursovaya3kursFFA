@@ -20,19 +20,9 @@ namespace Kursovaya_KPO_interface.View
     /// </summary>
     public partial class StartMenu : Page
     {
-        private Uri _mainMenuUri;
-        public static Uri StartMenuUri { get; set; }
         public StartMenu()
         {
             InitializeComponent();
-            StartMenuUri = new Uri("View/StartMenu.xaml", UriKind.Relative);
-        }
-
-        private void ButtonStartEnter_Click(object sender, RoutedEventArgs e)
-        {
-            if (_mainMenuUri == null)
-                _mainMenuUri = new Uri("View/MainMenu.xaml", UriKind.Relative);
-            NavigationService.Navigate(_mainMenuUri);          
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
@@ -45,6 +35,7 @@ namespace Kursovaya_KPO_interface.View
         {
             TextBox tb = sender as TextBox;
             tb.Text = string.Empty;
+            tb.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             tb.GotFocus -= Log_GotFocus;
         }
 
@@ -53,7 +44,13 @@ namespace Kursovaya_KPO_interface.View
         {
             PasswordBox pb = sender as PasswordBox;
             pb.Password = string.Empty;
+            pb.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             pb.GotFocus -= PasswordBox_GotFocus;
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((PasswordBox)sender).Tag = ((PasswordBox)sender).Password;
         }
     }
 }

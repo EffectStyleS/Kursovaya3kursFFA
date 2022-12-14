@@ -4,13 +4,19 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Kursovaya_KPO_interface.ViewModel"
+      xmlns:istruct="clr-namespace:Kursovaya_KPO_interface.Infrastructure"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1100"
-      ShowsNavigationUI="False">
+      ShowsNavigationUI="False"
+      x:Name="startMenu">
 
     <Page.DataContext>
         <local:StartMenuViewModel></local:StartMenuViewModel>
     </Page.DataContext>
+
+    <Page.Resources>
+        <istruct:SimpleMultiConverter x:Key="SimpleMultiConverter"/>
+    </Page.Resources>
     
     <Grid>
 
@@ -77,7 +83,7 @@
                     </Border.Background>
 
                     <TextBox x:Name="textBoxLogin" 
-                             Text="Логин" 
+                             Text="{Binding Path=CurrentUser.Login, UpdateSourceTrigger=PropertyChanged}"
                              FontSize="32" 
                              FontFamily="Montserrat"
                              FontWeight="Light"
@@ -102,7 +108,8 @@
                     </Border.Background>
 
                     <PasswordBox 
-                            Password="Пароль"
+                            x:Name="passwordBox"
+                            Password="******"
                             PasswordChar="*"
                             FontSize="32"
                             FontFamily="Montserrat"
@@ -110,7 +117,8 @@
                             Background="Transparent"
                             Foreground="#a2a2a2"
                             BorderBrush="{x:Null}"
-                            Padding="10 3 0 0" GotFocus="PasswordBox_GotFocus">
+                            Padding="10 3 0 0" GotFocus="PasswordBox_GotFocus"
+                            PasswordChanged="PasswordBox_PasswordChanged">
                     </PasswordBox>
 
                 </Border>
@@ -124,16 +132,33 @@
                     </Border.Background>
 
                     <Button Content="Вход"
-                            Click="ButtonStartEnter_Click"
+                            Command="{Binding EnterUser}"                           
                             Padding="5"  
                             Style="{StaticResource BaseButtonStyle}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource SimpleMultiConverter}">
+                                <Binding Path="Tag" ElementName="passwordBox"/>
+                                <Binding ElementName="startMenu"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
                     </Button>
                 </Border>
 
+                <TextBlock
+                    Margin="0 30 0 0"
+                    FontSize="22" 
+                    HorizontalAlignment="Center"
+                    TextWrapping="Wrap"
+                    Foreground="DarkRed"
+                    Text="{Binding Path=EnterResult, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource BaseTextBlockStyle}">
+
+                </TextBlock>
+                
 
                 <Border CornerRadius="10 0 10 0" 
                         VerticalAlignment="Bottom"
-                        Margin="450 143 0 0"
+                        Margin="450 87 0 0"
                         BorderBrush="{x:Null}">
 
                     <Border.Background>

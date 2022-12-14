@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kursovaya_KPO_interface.ViewModel; //убрать после переноса
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace Kursovaya_KPO_interface.View
         public MainMenu()
         {
             InitializeComponent();
-            _startMenuUri = StartMenu.StartMenuUri;
+            _startMenuUri = StartMenuViewModel.StartMenuUri; //перенести в vm !!!
             MainMenuUri = new Uri("View/MainMenu.xaml", UriKind.Relative);
         }
 

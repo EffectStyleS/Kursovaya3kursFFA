@@ -19,9 +19,10 @@ namespace Kursovaya_KPO_interface
     /// </summary>
     public partial class App : Application
     {
-
+        public static MainWindow MyMainWindow { get; set; }
         protected override void OnStartup(StartupEventArgs e)
         {
+
             base.OnStartup(e);
 
             string connection = "FFADb.Context";
@@ -38,9 +39,13 @@ namespace Kursovaya_KPO_interface
             IReportsService reportsService = kernel.Get<IReportsService>();
             ITimePeriodService timePeriodService = kernel.Get<ITimePeriodService>();
             IUserService userService = kernel.Get<IUserService>();
+            
+            MyMainWindow = new MainWindow(crudServ, userService, budgetServ, expenseService, expenseTypesService, incomeService, incomeTypesService,
+                plannedExpensesService, plannedIncomesService, reportsService, timePeriodService);
+
+            Current.MainWindow = MyMainWindow;
 
             Current.MainWindow = kernel.Get<MainWindow>();
-
             Current.MainWindow.Show();
         }
 
