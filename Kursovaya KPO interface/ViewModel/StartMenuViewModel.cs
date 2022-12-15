@@ -17,10 +17,11 @@ namespace Kursovaya_KPO_interface.ViewModel
     public class StartMenuViewModel : ViewModelBase
     {
         public static Uri StartMenuUri { get; set; }
+        public static Uri MainMenuUri { get; set; }
 
         IUserService userService;
         UserModel _currentUser;
-        private Uri _mainMenuUri;
+        
         string _enterResult;
 
         public static UserModel SelectedUser { get; set; }
@@ -91,9 +92,9 @@ namespace Kursovaya_KPO_interface.ViewModel
             {
                 if (SelectedUser.Password == CurrentUser.Password)
                 {
-                    if (_mainMenuUri == null)
-                        _mainMenuUri = new Uri("View/MainMenu.xaml", UriKind.Relative);
-                    Navigator.Page.NavigationService.Navigate(_mainMenuUri);
+                    if (MainMenuUri == null)
+                        MainMenuUri = new Uri("View/MainMenu.xaml", UriKind.Relative);
+                    Navigator.Page.NavigationService.Navigate(MainMenuUri);
                     EnterResult = "";
                 }
                 else

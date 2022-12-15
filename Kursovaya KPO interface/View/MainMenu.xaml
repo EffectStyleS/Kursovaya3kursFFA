@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Kursovaya_KPO_interface.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1100"
-      ShowsNavigationUI="False">
+      ShowsNavigationUI="False"
+      x:Name="mainMenu">
 
     <Page.DataContext>
         <local:MainMenuViewModel></local:MainMenuViewModel>
@@ -26,7 +27,7 @@
                        Style="{StaticResource BaseTextBlockStyle}">
             </TextBlock>
 
-            <TextBlock Text="Добро пожаловать, Сергей!" 
+            <TextBlock Text="{Binding Path=Greeting, UpdateSourceTrigger=PropertyChanged}" 
                        FontSize="36" 
                        HorizontalAlignment="Center"
                        Style="{StaticResource BaseTextBlockStyle}">
@@ -40,7 +41,8 @@
                     Content="Бюджеты"
                     Margin="0 20 0 0"
                     BorderThickness="0"
-                    Click="ButtonBudgets_Click"
+                    Command="{Binding ToBudgetMenu}"
+                    CommandParameter="{Binding ElementName=mainMenu}"
                     Padding="10"
                     Style="{StaticResource BaseButtonStyle}">
             </Button>
@@ -49,7 +51,8 @@
                     Content="Доходы"
                     Margin="0 14 0 0"
                     BorderThickness="0"
-                    Click="ButtonIncomes_Click"
+                    Command="{Binding ToIncomes}"
+                    CommandParameter="{Binding ElementName=mainMenu}"
                     Padding="10"
                     Style="{StaticResource BaseButtonStyle}">
             </Button>
@@ -58,7 +61,8 @@
                     Content="Расходы"
                     Margin="0 14 0 0"
                     BorderThickness="0"
-                    Click="ButtonExpenses_Click"
+                    Command="{Binding ToExpenses}"
+                    CommandParameter="{Binding ElementName=mainMenu}"
                     Padding="10"
                     Style="{StaticResource BaseButtonStyle}">
             </Button>
@@ -67,7 +71,8 @@
                     Content="Выйти из аккаунта"
                     Margin="0 14 0 0"
                     BorderThickness="0"
-                    Click="ButtonExitToStartMenu_Click"
+                    Command="{Binding ToStartMenu}"
+                    CommandParameter="{Binding ElementName=mainMenu}"
                     Padding="10"
                     Style="{StaticResource BaseButtonStyle}">
             </Button>

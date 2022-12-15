@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kursovaya_KPO_interface.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,7 @@ namespace Kursovaya_KPO_interface.View
         public Expenses()
         {
             InitializeComponent();
-            _mainMenuUri = MainMenu.MainMenuUri;
+            _mainMenuUri = MainMenuViewModel.MainMenuUri; //перенести в wm
         }
 
         private void ExpensesButtonToMainMenu_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kursovaya_KPO_interface.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace Kursovaya_KPO_interface.View
         public Incomes()
         {
             InitializeComponent();
-            _mainMenuUri = MainMenu.MainMenuUri;
+            _mainMenuUri = MainMenuViewModel.MainMenuUri;  //перенести в vm
         }
 
         private void IncomesButtonToMainMenu_Click(object sender, RoutedEventArgs e)

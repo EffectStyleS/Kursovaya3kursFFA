@@ -1,5 +1,4 @@
-﻿using Kursovaya_KPO_interface.ViewModel; //убрать после переноса
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,51 +20,49 @@ namespace Kursovaya_KPO_interface.View
     /// </summary>
     public partial class MainMenu : Page
     {
-        private Uri _startMenuUri;
-        private Uri _incomesUri;
-        private Uri _expensesUri;
-        private Uri _budgetMenuUri;
+        //private Uri _startMenuUri;
+        //private Uri _incomesUri;
+        //private Uri _expensesUri;
+        //private Uri _budgetMenuUri;
 
-        public static Uri MainMenuUri { get; set; }
+        //public static Uri MainMenuUri { get; set; }
         public MainMenu()
         {
             InitializeComponent();
-            _startMenuUri = StartMenuViewModel.StartMenuUri; //перенести в vm !!!
-            MainMenuUri = new Uri("View/MainMenu.xaml", UriKind.Relative);
         }
 
-        private void ButtonExitToStartMenu_Click(object sender, RoutedEventArgs e)
-        {
-            if (_startMenuUri == null)
-                _startMenuUri = new Uri("View/StartMenu.xaml", UriKind.Relative);
-            NavigationService.Navigate(_startMenuUri);
-        }
+        //private void ButtonExitToStartMenu_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_startMenuUri == null)
+        //        _startMenuUri = new Uri("View/StartMenu.xaml", UriKind.Relative);
+        //    NavigationService.Navigate(_startMenuUri);
+        //}
 
-        private void ButtonIncomes_Click(object sender, RoutedEventArgs e)
-        {
-            if (_incomesUri == null)
-                _incomesUri = new Uri("View/Incomes.xaml", UriKind.Relative);
-            NavigationService.Navigate(_incomesUri);
-        }
+        //private void ButtonIncomes_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_incomesUri == null)
+        //        _incomesUri = new Uri("View/Incomes.xaml", UriKind.Relative);
+        //    NavigationService.Navigate(_incomesUri);
+        //}
 
-        private void ButtonExpenses_Click(object sender, RoutedEventArgs e)
-        {
-            if (_expensesUri == null)
-                _expensesUri = new Uri("View/Expenses.xaml", UriKind.Relative);
-            NavigationService.Navigate(_expensesUri);
-        }
+        //private void ButtonExpenses_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_expensesUri == null)
+        //        _expensesUri = new Uri("View/Expenses.xaml", UriKind.Relative);
+        //    NavigationService.Navigate(_expensesUri);
+        //}
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
             App.Current.Shutdown();
         }
 
-        private void ButtonBudgets_Click(object sender, RoutedEventArgs e)
-        {
-            if (_budgetMenuUri == null)
-                _budgetMenuUri = new Uri("View/BudgetMenu.xaml", UriKind.Relative);
-            NavigationService.Navigate(_budgetMenuUri);
-        }
+        //private void ButtonBudgets_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (_budgetMenuUri == null)
+        //        _budgetMenuUri = new Uri("View/BudgetMenu.xaml", UriKind.Relative);
+        //    NavigationService.Navigate(_budgetMenuUri);
+        //}
     }
 
 }

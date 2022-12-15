@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kursovaya_KPO_interface.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace Kursovaya_KPO_interface.View
         public BudgetMenu()
         {
             InitializeComponent();
-            _mainMenuUri = MainMenu.MainMenuUri;
+            _mainMenuUri = MainMenuViewModel.MainMenuUri; //перенести в vm
             BudgetMenuUri = new Uri("View/BudgetMenu.xaml", UriKind.Relative);
         }
 
