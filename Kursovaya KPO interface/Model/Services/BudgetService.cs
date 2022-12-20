@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kursovaya_KPO_interface.Model.Services
 {
-    internal class BudgetService : IBudgetService
+    public class BudgetService : IBudgetService
     {
     }
 }

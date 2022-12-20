@@ -54,7 +54,7 @@
                         Style="{StaticResource BaseButtonStyle}">
             </Button>
 
-            <StackPanel x:Name="newBudgetSettings" Visibility="Hidden">
+            <StackPanel x:Name="newBudgetSettings" Visibility="Visible">
                 
                 <StackPanel Orientation="Horizontal">
                     

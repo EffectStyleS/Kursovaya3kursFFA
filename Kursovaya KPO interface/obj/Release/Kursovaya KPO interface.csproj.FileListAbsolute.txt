@@ -1,0 +1,44 @@
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Kursovaya KPO interface.exe.config
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Kursovaya KPO interface.exe
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Kursovaya KPO interface.pdb
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\EntityFramework.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Kursovaya DAL.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Ninject.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Kursovaya DAL.pdb
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Kursovaya DAL.dll.config
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\EntityFramework.xml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\Ninject.xml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\ru\EntityFramework.resources.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\bin\Release\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.csproj.AssemblyReference.cache
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.csproj.SuggestedBindingRedirects.cache
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\BudgetMenu.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\Expenses.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\Incomes.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\MainMenu.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\MainWindow.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\PlannedExpenses.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\PlannedIncomes.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\StartMenu.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\App.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface_MarkupCompile.cache
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface_MarkupCompile.lref
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\App.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\BudgetMenu.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\Expenses.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\Incomes.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\MainMenu.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\MainWindow.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\PlannedExpenses.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\PlannedIncomes.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\View\StartMenu.baml
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.g.resources
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya_KPO_interface.Properties.Resources.resources
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.csproj.GenerateResource.cache
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.csproj.CoreCompileInputs.cache
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.csproj.CopyComplete
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.exe
+C:\Users\sereg\source\repos\Kursovaya KPO interface\Kursovaya KPO interface\obj\Release\Kursovaya KPO interface.pdb

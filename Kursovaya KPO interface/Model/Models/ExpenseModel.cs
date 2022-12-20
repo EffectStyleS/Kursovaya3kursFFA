@@ -26,5 +26,14 @@ namespace Kursovaya_KPO_interface.Model.Models
         public System.DateTime Date { get; set; }
         public int ExpenseTypesId { get; set; }
         public int UserId { get; set; }
+
+        public string ExpenseType { get; set; }
+        public string OnlyDate
+        {
+            get
+            {
+                return Date.ToShortDateString();
+            }
+        }
     }
 }

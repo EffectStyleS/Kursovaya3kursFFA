@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище FamilyFinanceAnalysisModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Budget">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="TimePeriodId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Expense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="money" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="ExpenseTypesId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExpenseTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Income">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="money" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="IncomeTypesId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IncomeTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlannedExpenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sum" Type="money" />
+    <Property Name="ExpenseTypesId" Type="int" Nullable="false" />
+    <Property Name="BudgetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlannedIncomes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Sum" Type="money" />
+    <Property Name="IncomeTypesId" Type="int" Nullable="false" />
+    <Property Name="BudgetId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TimePeriod">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="40" Nullable="false" />
+    <Property Name="Role" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Budget_TimePeriod">
+    <End Role="TimePeriod" Type="Self.TimePeriod" Multiplicity="1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimePeriod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="TimePeriodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Budget_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expense_ExpenseTypes">
+    <End Role="ExpenseTypes" Type="Self.ExpenseTypes" Multiplicity="1" />
+    <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="ExpenseTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expense_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Income_IncomeTypes">
+    <End Role="IncomeTypes" Type="Self.IncomeTypes" Multiplicity="1" />
+    <End Role="Income" Type="Self.Income" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncomeTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Income">
+        <PropertyRef Name="IncomeTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Income_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Income" Type="Self.Income" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Income">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedExpenses_Budget">
+    <End Role="Budget" Type="Self.Budget" Multiplicity="1" />
+    <End Role="PlannedExpenses" Type="Self.PlannedExpenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Budget">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedExpenses">
+        <PropertyRef Name="BudgetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedExpenses_ExpenseTypes">
+    <End Role="ExpenseTypes" Type="Self.ExpenseTypes" Multiplicity="1" />
+    <End Role="PlannedExpenses" Type="Self.PlannedExpenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedExpenses">
+        <PropertyRef Name="ExpenseTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedIncomes_Budget">
+    <End Role="Budget" Type="Self.Budget" Multiplicity="1" />
+    <End Role="PlannedIncomes" Type="Self.PlannedIncomes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Budget">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedIncomes">
+        <PropertyRef Name="BudgetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedIncomes_IncomeTypes">
+    <End Role="IncomeTypes" Type="Self.IncomeTypes" Multiplicity="1" />
+    <End Role="PlannedIncomes" Type="Self.PlannedIncomes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncomeTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedIncomes">
+        <PropertyRef Name="IncomeTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище FamilyFinanceAnalysisModelContainer">
+    <EntitySet Name="Budget" EntityType="Self.Budget" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Expense" EntityType="Self.Expense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpenseTypes" EntityType="Self.ExpenseTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Income" EntityType="Self.Income" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IncomeTypes" EntityType="Self.IncomeTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlannedExpenses" EntityType="Self.PlannedExpenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlannedIncomes" EntityType="Self.PlannedIncomes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimePeriod" EntityType="Self.TimePeriod" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Budget_TimePeriod" Association="Self.FK_Budget_TimePeriod">
+      <End Role="TimePeriod" EntitySet="TimePeriod" />
+      <End Role="Budget" EntitySet="Budget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Budget_User" Association="Self.FK_Budget_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Budget" EntitySet="Budget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expense_ExpenseTypes" Association="Self.FK_Expense_ExpenseTypes">
+      <End Role="ExpenseTypes" EntitySet="ExpenseTypes" />
+      <End Role="Expense" EntitySet="Expense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expense_User" Association="Self.FK_Expense_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Expense" EntitySet="Expense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Income_IncomeTypes" Association="Self.FK_Income_IncomeTypes">
+      <End Role="IncomeTypes" EntitySet="IncomeTypes" />
+      <End Role="Income" EntitySet="Income" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Income_User" Association="Self.FK_Income_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Income" EntitySet="Income" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedExpenses_Budget" Association="Self.FK_PlannedExpenses_Budget">
+      <End Role="Budget" EntitySet="Budget" />
+      <End Role="PlannedExpenses" EntitySet="PlannedExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedExpenses_ExpenseTypes" Association="Self.FK_PlannedExpenses_ExpenseTypes">
+      <End Role="ExpenseTypes" EntitySet="ExpenseTypes" />
+      <End Role="PlannedExpenses" EntitySet="PlannedExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedIncomes_Budget" Association="Self.FK_PlannedIncomes_Budget">
+      <End Role="Budget" EntitySet="Budget" />
+      <End Role="PlannedIncomes" EntitySet="PlannedIncomes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedIncomes_IncomeTypes" Association="Self.FK_PlannedIncomes_IncomeTypes">
+      <End Role="IncomeTypes" EntitySet="IncomeTypes" />
+      <End Role="PlannedIncomes" EntitySet="PlannedIncomes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

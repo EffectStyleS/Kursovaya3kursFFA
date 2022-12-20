@@ -34,9 +34,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public MainMenuViewModel()
         {
-            Greeting = StartMenuViewModel.SelectedUser.Name;
+            Greeting      = StartMenuViewModel.SelectedUser.Name;
             _startMenuUri = StartMenuViewModel.StartMenuUri;
-            MainMenuUri = StartMenuViewModel.MainMenuUri;
+            MainMenuUri   = StartMenuViewModel.MainMenuUri;
         }
 
         #region ToBudgetMenu

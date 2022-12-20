@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:Kursovaya_KPO_interface.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1100"
-      ShowsNavigationUI="False">
+      ShowsNavigationUI="False"
+      x:Name="expenses">
 
     <Page.DataContext>
         <local:ExpensesViewModel></local:ExpensesViewModel>
@@ -28,7 +29,7 @@
                            Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <TextBlock Text="Расходы пользователя Сергей" 
+                <TextBlock Text="{Binding Path=Greeting}" 
                            FontSize="36" 
                            HorizontalAlignment="Center"
                            Style="{StaticResource BaseTextBlockStyle}">
@@ -38,29 +39,355 @@
 
                 </Separator>
 
-                <DataGrid BorderBrush="{x:Null}"
-                          Margin="0 15 0 0"
-                          Background="#e4e4e4"
-                          Padding="0 0 0 323">
+                <ListBox 
+                    ItemsSource="{Binding AllExpenses}"
+                    SelectedItem="{Binding SelectedExpense}"
+                    Background="#f4f4f4"
+                    BorderBrush="{x:Null}"
+                    Margin="0 14 0 0"
+                    Height="300">
 
-                    <DataGrid.Columns>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="270"/>
+                                    <ColumnDefinition Width="270"/>
+                                    <ColumnDefinition Width="270"/>
+                                    <ColumnDefinition Width="270"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
+                                           Grid.Column="0"
+                                           TextAlignment="Center"
+                                           FontSize="24"
+                                           Text="{Binding OnlyDate}"/>
+                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
+                                           Grid.Column="1"
+                                           TextAlignment="Center"
+                                           FontSize="24"
+                                           Text="{Binding ExpenseType}"/>
+                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
+                                           Grid.Column="2"
+                                           TextAlignment="Center"
+                                           FontSize="24"
+                                           Text="{Binding Name}"/>
+                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
+                                           Grid.Column="3"
+                                           TextAlignment="Center"
+                                           FontSize="24"
+                                           Text="{Binding Value}"/>
+                            </Grid>
 
-                        <DataGridTextColumn FontFamily="Montserrat" FontSize="32" Width="*" Header="Дата"></DataGridTextColumn>
-                        <DataGridTextColumn FontFamily="Montserrat" Width="*" Header="Тип"></DataGridTextColumn>
-                        <DataGridTextColumn FontFamily="Montserrat" Width="*" Header="Название"></DataGridTextColumn>
-                        <DataGridTextColumn FontFamily="Montserrat" Width="*" Header="Сумма"></DataGridTextColumn>
 
-                    </DataGrid.Columns>
-
-                </DataGrid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="0 37.5 0 0">
+            <StackPanel x:Name="stackPanelCrudMenu"
+                Visibility="Visible"
+                HorizontalAlignment="Center"
+                Orientation="Horizontal"
+                Margin="0 10 0 0">
 
-                <Border Margin="0 0 0 0"
-                        CornerRadius="0 10 0 10">
+                <Border CornerRadius="10">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Добавить расход"                            
+                            Click="ButtonAddExpense_Click"
+                            Command="{Binding CreateExpense}"
+                            Padding="15 14 15 14"
+                            Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+
+                <Border 
+                    Margin="20 0 0 0"
+                    CornerRadius="10">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                        Content="Редактировать расход"
+                        Click="ButtonAddExpense_Click"
+                        Command="{Binding UpdateExpense}"
+                        Padding="15 14 15 14"
+                        Style="{StaticResource BaseButtonStyle}"
+                        />
+
+                </Border>
+
+                <Border 
+                    Margin="20 0 0 0"
+                    CornerRadius="10">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                        Content="Удалить расход"
+                        Padding="15 14 15 14"
+                        Command="{Binding DeleteExpense}"
+                        Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelDate"
+                        Margin="0 30 0 0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Visibility="Collapsed">
+
+                <TextBlock Text="Дата: " 
+                           FontSize="32" 
+                           HorizontalAlignment="Left"
+                           Margin="30 0 0 0"
+                           Style="{StaticResource BaseTextBlockStyle}">
+                </TextBlock>
+
+                <!--<TextBlock
+                    Text="{Binding OnlyDate, UpdateSourceTrigger=PropertyChanged}" 
+                    FontSize="32" 
+                    HorizontalAlignment="Left"
+                    Margin="30 0 0 0"
+                    Style="{StaticResource BaseTextBlockStyle}">
+
+                </TextBlock>-->
+
+                <DatePicker 
+                            x:Name="datePicker"
+                            Margin="20 0 0 0"
+                            FontFamily="Montserrat"
+                            FontSize="28"
+                            VerticalAlignment="Center"
+                            FontWeight="Light"
+                            BorderBrush="{x:Null}"                    
+                            SelectedDate="{Binding StartDate}"
+                            DisplayDate="{Binding StartDate}"                            
+                            Width="30">
+
+                </DatePicker>
+
+
+
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Далее"
+                            Padding="10 5 10 5"
+                            Command="{Binding AddExpenseDate}"
+                            Click ="ButtonAddExpenseDate_Click"
+                            Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Отменить"
+                            Padding="10 5 10 5"
+                            Command="{Binding Cancel}"
+                            Click="ButtonCancel_Click"
+                            Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelType"
+                        Margin="0 30 0 0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Visibility="Collapsed">
+
+                <TextBlock Text="Тип дохода: " 
+                           FontSize="32" 
+                           HorizontalAlignment="Left"
+                           Margin="30 0 0 0"
+                           Style="{StaticResource BaseTextBlockStyle}">
+                </TextBlock>
+
+                <ComboBox Margin="10 0 0 0"
+                          ItemsSource="{Binding ExpenseTypes}"
+                          SelectedIndex="{Binding SelectedExpenseTypesId}">
+
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       Style="{StaticResource BaseTextBlockStyle}"
+                                       FontSize="28" 
+                                       HorizontalAlignment="Center">
+                            </TextBlock>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Далее"
+                            Padding="10 5 10 5"
+                            Click="ButtonAddExpenseType_Click"
+                            Command="{Binding AddExpenseTypesId}"
+                            Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Отменить"
+                            Padding="10 5 10 5"
+                            Command="{Binding Cancel}"
+                            Click="ButtonCancel_Click"
+                            Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelName"
+                        Margin="0 30 0 0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Visibility="Collapsed">
+
+                <TextBlock Text="Наименование: " 
+                           FontSize="32" 
+                           HorizontalAlignment="Left"
+                           Margin="30 0 0 0"
+                           Style="{StaticResource BaseTextBlockStyle}">
+                </TextBlock>
+
+                <Border CornerRadius="5" 
+                        BorderBrush="Black"
+                        BorderThickness="0"
+                        Margin="10 0 20 0">
+
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
+                            <GradientStop Color="#e4e4e4"  Offset="0"/>
+                            <GradientStop Color="#ffffff"  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBox 
+                        Padding="10 0 3 0"
+                        FontSize="32"
+                        Width="150"
+                        MaxWidth="200"
+                        FontFamily="Montserrat"
+                        FontWeight="Light"
+                        Background="Transparent"
+                        BorderBrush="{x:Null}"
+                        Text="{Binding SelectedExpense.Name, UpdateSourceTrigger=PropertyChanged}"
+                        >
+
+                    </TextBox>
+                </Border>
+
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                        Content="Далее"
+                        Padding="10 5 10 5"
+                        Style="{StaticResource BaseButtonStyle}"
+                        Command="{Binding AddExpenseName}"
+                        Click="ButtonAddExpenseName_Click"/>
+
+                </Border>
+
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Отменить"
+                            Padding="10 5 10 5"
+                            Command="{Binding Cancel}"
+                            Click="ButtonCancel_Click"
+                            Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelValue"
+                        Margin="0 30 0 0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Visibility="Collapsed">
+
+                <TextBlock Text="Сумма: " 
+                           FontSize="32" 
+                           HorizontalAlignment="Left"
+                           Margin="30 0 0 0"
+                           Style="{StaticResource BaseTextBlockStyle}">
+                </TextBlock>
+
+                <Border CornerRadius="5" 
+                        BorderBrush="Black"
+                        BorderThickness="0"
+                        Margin="10 0 20 0">
+
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
+                            <GradientStop Color="#e4e4e4"  Offset="0"/>
+                            <GradientStop Color="#ffffff"  Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBox x:Name="numberTextBox"
+                        Width="150"
+                        PreviewTextInput="NumberValidationTextBox"
+                        Text="{Binding SelectedExpense.Value, UpdateSourceTrigger=PropertyChanged}"
+                        Padding="10 0 3 0"
+                        FontSize="32"
+                        MaxWidth="200"
+                        FontFamily="Montserrat"
+                        FontWeight="Light"
+                        Background="Transparent"
+                        BorderBrush="{x:Null}">
+
+                    </TextBox>
+                </Border>
+
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
@@ -68,29 +395,46 @@
 
                     <Button 
                             Content="Сохранить"
-                            Padding="30 14 30 14"
-                            Style="{StaticResource BaseButtonStyle}">
-                    </Button>
+                            Padding="10 5 10 5"
+                            Click="ButtonCancel_Click"
+                            Command="{Binding AddExpenseValueAndSave}"
+                            Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
 
-                <Border Margin="705 0 0 0"
-                        CornerRadius="10 0 10 0">
+                <Border CornerRadius="10"
+                        Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
-                    <Button 
-                            Content="Выйти"
-                            Padding="54 14 50 14"
-                            Click="ExpensesButtonToMainMenu_Click"
-                            Style="{StaticResource BaseButtonStyle}">
-                    </Button>
+                    <Button Content="Отменить"
+                            Padding="10 5 10 5"
+                            Command="{Binding Cancel}"
+                            Click="ButtonCancel_Click"
+                            Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
-
             </StackPanel>
+
+
+            <Border Margin="950 19 0 0"
+                    CornerRadius="10 0 10 0">
+
+                <Border.Background>
+                    <SolidColorBrush Color="#e4e4e4"/>
+                </Border.Background>
+
+                <Button 
+                        Content="Выйти"
+                        Padding="15 10 15 10"
+                        Command="{Binding ToMainMenu}"
+                        CommandParameter="{Binding ElementName=expenses}"
+                        Style="{StaticResource BaseButtonStyle}">
+                </Button>
+
+            </Border>
 
         </StackPanel>
 

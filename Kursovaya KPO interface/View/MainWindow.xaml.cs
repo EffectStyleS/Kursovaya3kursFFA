@@ -21,7 +21,7 @@ namespace Kursovaya_KPO_interface.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Frame frame;
+        private Frame _frame;
         public IDbCrud CrudDb { get; set; }
         public IUserService UserService { get; set; }
         public IBudgetService BudgetService { get; set; }
@@ -33,7 +33,7 @@ namespace Kursovaya_KPO_interface.View
         public IPlannedIncomesService PlannedIncomesService { get; set; }
         public IReportsService ReportsService { get; set; }
         public ITimePeriodService TimePeriodService { get; set; }
-        public Frame Frame { get => frame; set => frame = value; }
+        public Frame Frame { get => _frame; set => _frame = value; }
 
         public MainWindow(IDbCrud crudDb, IUserService userService, IBudgetService budgetService, IExpenseService expenseService,
             IExpenseTypesService expenseTypesService, IIncomeService incomeService, IIncomeTypesService incomeTypesService,
@@ -53,6 +53,9 @@ namespace Kursovaya_KPO_interface.View
             TimePeriodService = timePeriodService;
             ExpenseService = expenseService;
             ExpenseTypesService = expenseTypesService;
+            PlannedExpensesService = plannedExpensesService;
+            IncomeTypesService = incomeTypesService;
+            PlannedIncomesService = plannedIncomesService;
         }
 
 

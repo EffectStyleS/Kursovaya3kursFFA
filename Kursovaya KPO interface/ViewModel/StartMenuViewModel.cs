@@ -16,10 +16,8 @@ namespace Kursovaya_KPO_interface.ViewModel
 {
     public class StartMenuViewModel : ViewModelBase
     {
-        public static Uri StartMenuUri { get; set; }
-        public static Uri MainMenuUri { get; set; }
-
-        IUserService userService;
+       
+        IUserService _userService;
         UserModel _currentUser;
         
         string _enterResult;
@@ -60,13 +58,17 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged("EnterResult");
             }
         }
+        public static Uri StartMenuUri { get; set; }
+        public static Uri MainMenuUri { get; set; }
 
         public StartMenuViewModel()
         {
-            userService = App.MyMainWindow.UserService;
+            _userService = App.MyMainWindow.UserService;
             StartMenuUri = new Uri("View/StartMenu.xaml", UriKind.Relative);
         }
-         
+
+        #region EnterUser
+
         RelayCommand _enterUser;
         public ICommand EnterUser
         {
@@ -80,7 +82,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public void ExecuteEnterUserCommand(object parameter)
         {
-            SelectedUser = userService.GetUserByLogin(CurrentUser.Login);
+            SelectedUser = _userService.GetUserByLogin(CurrentUser.Login);
             
             if(parameter is object[] array)
             {
@@ -88,7 +90,7 @@ namespace Kursovaya_KPO_interface.ViewModel
                 Navigator.Page = array[1] as Page;
             }
 
-            if(SelectedUser != null)
+            if (SelectedUser != null)
             {
                 if (SelectedUser.Password == CurrentUser.Password)
                 {
@@ -97,25 +99,22 @@ namespace Kursovaya_KPO_interface.ViewModel
                     Navigator.Page.NavigationService.Navigate(MainMenuUri);
                     EnterResult = "";
                 }
-                else
-                {
-                    EnterResult = "Неверный пароль";
-                }
+                else { EnterResult = "Неверный пароль"; }
+
             }
-            else
-            {
-                EnterResult = "Пользователь с таким логином не существует";
-            }
+            else { EnterResult = "Пользователь с таким логином не существует"; }
+
         }
 
         public bool CanExecuteEnterUserCommand(object parameter)
         {
-            if (string.IsNullOrEmpty(CurrentUser.Login) || (CurrentUser.Login == "Логин"))
+            if (!string.IsNullOrEmpty(CurrentUser.Login) && CurrentUser.Login != "Логин")
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
+        #endregion
 
     }
 }

@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FamilyFinanceAnalysisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Budget">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="TimePeriodId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TimePeriod" Relationship="Self.FK_Budget_TimePeriod" FromRole="Budget" ToRole="TimePeriod" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Budget_User" FromRole="Budget" ToRole="User" />
+    <NavigationProperty Name="PlannedExpenses" Relationship="Self.FK_PlannedExpenses_Budget" FromRole="Budget" ToRole="PlannedExpenses" />
+    <NavigationProperty Name="PlannedIncomes" Relationship="Self.FK_PlannedIncomes_Budget" FromRole="Budget" ToRole="PlannedIncomes" />
+  </EntityType>
+  <EntityType Name="Expense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ExpenseTypesId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ExpenseTypes" Relationship="Self.FK_Expense_ExpenseTypes" FromRole="Expense" ToRole="ExpenseTypes" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Expense_User" FromRole="Expense" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ExpenseTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Expense" Relationship="Self.FK_Expense_ExpenseTypes" FromRole="ExpenseTypes" ToRole="Expense" />
+    <NavigationProperty Name="PlannedExpenses" Relationship="Self.FK_PlannedExpenses_ExpenseTypes" FromRole="ExpenseTypes" ToRole="PlannedExpenses" />
+  </EntityType>
+  <EntityType Name="Income">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="IncomeTypesId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="IncomeTypes" Relationship="Self.FK_Income_IncomeTypes" FromRole="Income" ToRole="IncomeTypes" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Income_User" FromRole="Income" ToRole="User" />
+  </EntityType>
+  <EntityType Name="IncomeTypes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Income" Relationship="Self.FK_Income_IncomeTypes" FromRole="IncomeTypes" ToRole="Income" />
+    <NavigationProperty Name="PlannedIncomes" Relationship="Self.FK_PlannedIncomes_IncomeTypes" FromRole="IncomeTypes" ToRole="PlannedIncomes" />
+  </EntityType>
+  <EntityType Name="PlannedExpenses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sum" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ExpenseTypesId" Type="Int32" Nullable="false" />
+    <Property Name="BudgetId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Budget" Relationship="Self.FK_PlannedExpenses_Budget" FromRole="PlannedExpenses" ToRole="Budget" />
+    <NavigationProperty Name="ExpenseTypes" Relationship="Self.FK_PlannedExpenses_ExpenseTypes" FromRole="PlannedExpenses" ToRole="ExpenseTypes" />
+  </EntityType>
+  <EntityType Name="PlannedIncomes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sum" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="IncomeTypesId" Type="Int32" Nullable="false" />
+    <Property Name="BudgetId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Budget" Relationship="Self.FK_PlannedIncomes_Budget" FromRole="PlannedIncomes" ToRole="Budget" />
+    <NavigationProperty Name="IncomeTypes" Relationship="Self.FK_PlannedIncomes_IncomeTypes" FromRole="PlannedIncomes" ToRole="IncomeTypes" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TimePeriod">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Budget" Relationship="Self.FK_Budget_TimePeriod" FromRole="TimePeriod" ToRole="Budget" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Budget" Relationship="Self.FK_Budget_User" FromRole="User" ToRole="Budget" />
+    <NavigationProperty Name="Expense" Relationship="Self.FK_Expense_User" FromRole="User" ToRole="Expense" />
+    <NavigationProperty Name="Income" Relationship="Self.FK_Income_User" FromRole="User" ToRole="Income" />
+  </EntityType>
+  <Association Name="FK_Budget_TimePeriod">
+    <End Role="TimePeriod" Type="Self.TimePeriod" Multiplicity="1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimePeriod">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="TimePeriodId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Budget_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Budget" Type="Self.Budget" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Budget">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedExpenses_Budget">
+    <End Role="Budget" Type="Self.Budget" Multiplicity="1" />
+    <End Role="PlannedExpenses" Type="Self.PlannedExpenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Budget">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedExpenses">
+        <PropertyRef Name="BudgetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedIncomes_Budget">
+    <End Role="Budget" Type="Self.Budget" Multiplicity="1" />
+    <End Role="PlannedIncomes" Type="Self.PlannedIncomes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Budget">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedIncomes">
+        <PropertyRef Name="BudgetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expense_ExpenseTypes">
+    <End Role="ExpenseTypes" Type="Self.ExpenseTypes" Multiplicity="1" />
+    <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="ExpenseTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expense_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Expense" Type="Self.Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedExpenses_ExpenseTypes">
+    <End Role="ExpenseTypes" Type="Self.ExpenseTypes" Multiplicity="1" />
+    <End Role="PlannedExpenses" Type="Self.PlannedExpenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedExpenses">
+        <PropertyRef Name="ExpenseTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Income_IncomeTypes">
+    <End Role="IncomeTypes" Type="Self.IncomeTypes" Multiplicity="1" />
+    <End Role="Income" Type="Self.Income" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncomeTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Income">
+        <PropertyRef Name="IncomeTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Income_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Income" Type="Self.Income" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Income">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlannedIncomes_IncomeTypes">
+    <End Role="IncomeTypes" Type="Self.IncomeTypes" Multiplicity="1" />
+    <End Role="PlannedIncomes" Type="Self.PlannedIncomes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncomeTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlannedIncomes">
+        <PropertyRef Name="IncomeTypesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FFAContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Budget" EntityType="Self.Budget" />
+    <EntitySet Name="Expense" EntityType="Self.Expense" />
+    <EntitySet Name="ExpenseTypes" EntityType="Self.ExpenseTypes" />
+    <EntitySet Name="Income" EntityType="Self.Income" />
+    <EntitySet Name="IncomeTypes" EntityType="Self.IncomeTypes" />
+    <EntitySet Name="PlannedExpenses" EntityType="Self.PlannedExpenses" />
+    <EntitySet Name="PlannedIncomes" EntityType="Self.PlannedIncomes" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TimePeriod" EntityType="Self.TimePeriod" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <AssociationSet Name="FK_Budget_TimePeriod" Association="Self.FK_Budget_TimePeriod">
+      <End Role="TimePeriod" EntitySet="TimePeriod" />
+      <End Role="Budget" EntitySet="Budget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Budget_User" Association="Self.FK_Budget_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Budget" EntitySet="Budget" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedExpenses_Budget" Association="Self.FK_PlannedExpenses_Budget">
+      <End Role="Budget" EntitySet="Budget" />
+      <End Role="PlannedExpenses" EntitySet="PlannedExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedIncomes_Budget" Association="Self.FK_PlannedIncomes_Budget">
+      <End Role="Budget" EntitySet="Budget" />
+      <End Role="PlannedIncomes" EntitySet="PlannedIncomes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expense_ExpenseTypes" Association="Self.FK_Expense_ExpenseTypes">
+      <End Role="ExpenseTypes" EntitySet="ExpenseTypes" />
+      <End Role="Expense" EntitySet="Expense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expense_User" Association="Self.FK_Expense_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Expense" EntitySet="Expense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedExpenses_ExpenseTypes" Association="Self.FK_PlannedExpenses_ExpenseTypes">
+      <End Role="ExpenseTypes" EntitySet="ExpenseTypes" />
+      <End Role="PlannedExpenses" EntitySet="PlannedExpenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Income_IncomeTypes" Association="Self.FK_Income_IncomeTypes">
+      <End Role="IncomeTypes" EntitySet="IncomeTypes" />
+      <End Role="Income" EntitySet="Income" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Income_User" Association="Self.FK_Income_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Income" EntitySet="Income" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlannedIncomes_IncomeTypes" Association="Self.FK_PlannedIncomes_IncomeTypes">
+      <End Role="IncomeTypes" EntitySet="IncomeTypes" />
+      <End Role="PlannedIncomes" EntitySet="PlannedIncomes" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FamilyFinanceAnalysisModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FamilyFinanceAnalysisModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
