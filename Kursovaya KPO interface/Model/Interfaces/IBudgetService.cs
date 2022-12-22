@@ -12,5 +12,7 @@ namespace Kursovaya_KPO_interface.Model.Interfaces
         void CreateProperties(BudgetModel budget);
 
         DateTime GetEndDate(BudgetModel budget);
+
+        void SavePDF(BudgetModel budget, string filePath);
     }
 }

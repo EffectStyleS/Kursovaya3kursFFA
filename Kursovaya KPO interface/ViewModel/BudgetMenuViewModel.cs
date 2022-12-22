@@ -2,6 +2,7 @@
 using Kursovaya_KPO_interface.Infrastructure;
 using Kursovaya_KPO_interface.Model.Interfaces;
 using Kursovaya_KPO_interface.Model.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,7 @@ namespace Kursovaya_KPO_interface.ViewModel
         private decimal? _saldo;
         private IPlannedExpensesService _plannedExpensesService;
         private IPlannedIncomesService _plannedIncomesService;
+        private string _filePath;
 
         //ctors
         public BudgetMenuViewModel()
@@ -237,6 +239,20 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged(nameof(Saldo));
             }
         }
+        public string FilePath
+        {
+            get
+            {
+                if (_filePath == null)
+                    _filePath = "Бюджет.pdf";
+                return _filePath; 
+            }
+            set
+            {
+                _filePath = value;
+                OnPropertyChanged(nameof(FilePath));
+            }
+        }
 
         //private methods
         private void LoadBudgetProperties()
@@ -408,6 +424,36 @@ namespace Kursovaya_KPO_interface.ViewModel
         }
 
         public bool CanExecuteReadBudgetsCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region SavePDF
+
+        RelayCommand _savePDF;
+        public ICommand SavePDF
+        {
+            get
+            {
+                if (_savePDF == null)
+                    _savePDF = new RelayCommand(ExecuteSavePDFCommand, CanExecuteSavePDFCommand);
+                return _savePDF;
+            }
+        }
+
+        public void ExecuteSavePDFCommand(object parameter)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                FilePath = saveFileDialog.FileName;
+            }
+
+            _budgetService.SavePDF(UserBudgets[SelectedBudgetId], FilePath);
+        }
+
+        public bool CanExecuteSavePDFCommand(object parameter)
         {
             return true;
         }

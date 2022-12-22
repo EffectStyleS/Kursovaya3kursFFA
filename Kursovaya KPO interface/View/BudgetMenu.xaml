@@ -35,7 +35,8 @@
 
             <StackPanel x:Name="stackPanelMode"
                 Orientation="Horizontal"
-                Margin="0 15 0 348">
+                Margin="0 15 0 348"
+                        Visibility="Collapsed">
                         
                 <Border CornerRadius="0 10 10 0">
 
@@ -70,7 +71,8 @@
             </StackPanel>
 
             <StackPanel x:Name="stackPanelNewBudgetSettings"
-                        Margin="0 0 0 73.5">
+                        Margin="0 0 0 73.5"
+                        Visibility="Collapsed">
                 
                 <StackPanel Orientation="Horizontal">
                     
@@ -291,6 +293,22 @@
                             </ComboBox.ItemTemplate>
 
                         </ComboBox>
+
+                        <Border CornerRadius="10"
+                        HorizontalAlignment="Center"
+                        Margin="50 0 0 0">
+
+                            <Border.Background>
+                                <SolidColorBrush Color="#e4e4e4"/>
+                            </Border.Background>
+
+                            <Button 
+                                Content="Сохранить в PDF"
+                                Padding="10"
+                                Command="{Binding SavePDF}"
+                                Style="{StaticResource BaseButtonStyle}">
+                            </Button>
+                        </Border>
 
                     </WrapPanel>
 
