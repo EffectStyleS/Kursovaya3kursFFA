@@ -17,6 +17,7 @@ namespace Kursovaya_KPO_interface.Model.Interfaces
         void DeleteUser(int id);
 
         List<BudgetModel> GetAllUserBudgets(int userId);
+        List<BudgetModel> GetAllBudgets();
         BudgetModel GetUserBudgetById(int id);
         void CreateBudget(BudgetModel budget);
         void UpdateBudget(BudgetModel budget);

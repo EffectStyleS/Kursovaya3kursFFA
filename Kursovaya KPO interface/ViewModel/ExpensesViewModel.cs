@@ -29,19 +29,34 @@ namespace Kursovaya_KPO_interface.ViewModel
         DateTime _startDate;
         ExpenseModel _selectedExpense;
         int _selectedExpenseTypesId;
+        private string _warning;
+        //private List<ExpenseModel> _expensesByType;
+        //private List<decimal?> _sumOfValuesExpensesByType;
+        //private decimal? _sumOfExpensesByType;
+        private List<BudgetModel> _userBudgets;
+        //private List<PlannedExpensesModel> _plannedExpenses;
+        //private List<decimal?> _budgetValuesOfPlannedExpenses;
+        IReportsService _reportsService;
+        IBudgetService _budgetService;
+        private List<List<decimal?>> _differences;
+        private decimal? _difference;
+        private BudgetModel _differenceBudget;
+        private ExpenseTypesModel _differenceType;
 
         //ctors
         public ExpensesViewModel()
         {
-            _user         = StartMenuViewModel.SelectedUser;
-            Greeting      = _user.Name;
-            _mainMenuUri  = MainMenuViewModel.MainMenuUri;
-            ExpensesUri   = MainMenuViewModel.ExpensesUri;
-            _dbOperations = App.MyMainWindow.CrudDb;
-            _expenseTypes = _dbOperations.GetAllExpenseTypes();
-            _startDate    = DateTime.Today;
-
+            _user           = StartMenuViewModel.SelectedUser;
+            Greeting        = _user.Name;
+            _mainMenuUri    = MainMenuViewModel.MainMenuUri;
+            ExpensesUri     = MainMenuViewModel.ExpensesUri;
+            _dbOperations   = App.MyMainWindow.CrudDb;
+            _expenseTypes   = _dbOperations.GetAllExpenseTypes();
+            _startDate      = DateTime.Today;            
+            _reportsService = App.MyMainWindow.ReportsService;
+            _budgetService  = App.MyMainWindow.BudgetService;
             LoadUserExpenses();
+            GetDifference();
         }
 
         //public properties
@@ -133,8 +148,173 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged("SelectedExpenseTypesId");
             }
         }
+        public string Warning
+        {
+            get
+            {
+                if (_warning == null)
+                    _warning = " ";
+                return _warning;
+            }
+            set
+            {
+                _warning = value;
+                OnPropertyChanged(nameof(Warning));
+            }
+        }
 
-        //public methods
+        //public List<ExpenseModel> ExpensesByType
+        //{
+        //    get
+        //    {
+        //        if (_expensesByType == null)
+        //            _expensesByType = new List<ExpenseModel>();
+        //        return _expensesByType;
+        //    }
+        //    set
+        //    {
+        //        _expensesByType = value;
+        //        OnPropertyChanged(nameof(ExpensesByType));
+        //    }
+        //}
+        //public List<decimal?> SumOfValuesExpensesByType
+        //{
+        //    get
+        //    {
+        //        if(_sumOfValuesExpensesByType == null)
+        //            _sumOfValuesExpensesByType = new List<decimal?>();
+        //        return _sumOfValuesExpensesByType;
+        //    }
+        //    set
+        //    {
+        //        _sumOfValuesExpensesByType = value;
+        //        OnPropertyChanged(nameof(SumOfValuesExpensesByType));
+        //    }
+        //}
+        //public decimal? SumOfExpensesByType
+        //{
+        //    get 
+        //    {
+        //        return _sumOfExpensesByType;
+        //    }
+        //    set
+        //    {
+        //        _sumOfExpensesByType= value;
+        //        OnPropertyChanged(nameof(SumOfExpensesByType));
+        //    }
+        //}
+        //public List<BudgetModel> UserBudgets
+        //{
+        //    get
+        //    {
+        //        if (_userBudgets == null)
+        //            _userBudgets = _dbOperations.GetAllUserBudgets(_user.Id);
+        //        return _userBudgets;
+        //    }
+        //    set
+        //    {
+        //        _userBudgets = value;
+        //        OnPropertyChanged(nameof(UserBudgets));
+        //    }
+        //}
+        //public List<PlannedExpensesModel> PlannedExpenses
+        //{
+        //    get
+        //    {
+        //        return _plannedExpenses;
+        //    }
+        //    set
+        //    {
+        //        _plannedExpenses = value;
+        //        OnPropertyChanged(nameof(PlannedExpenses));
+        //    }
+        //}
+        //public List<decimal?> BudgetValuesOfPlannedExpenses
+        //{
+        //    get
+        //    {
+        //        if (_budgetValuesOfPlannedExpenses == null)
+        //            _budgetValuesOfPlannedExpenses = new List<decimal?>();
+        //        return _budgetValuesOfPlannedExpenses;
+        //    }
+        //    set
+        //    {
+        //        _budgetValuesOfPlannedExpenses = value;
+        //        OnPropertyChanged(nameof(BudgetValuesOfPlannedExpenses));
+        //    }
+        //}
+     
+       
+        public List<List<decimal?>> Differences
+        {
+            get
+            {
+                if (_differences == null)
+                    _differences = new List<List<decimal?>>();
+                return _differences;
+            }
+            set
+            {
+                _differences= value;
+                OnPropertyChanged(nameof(_differences));
+            }
+        }
+        public decimal? Difference
+        {
+            get
+            {
+                return _difference;
+            }
+            set
+            {
+                _difference = value;
+                OnPropertyChanged(nameof(Difference));
+            }
+        }
+        public List<BudgetModel> UserBudgets
+        {
+            get
+            {
+                if (_userBudgets == null)
+                    _userBudgets = _dbOperations.GetAllUserBudgets(_user.Id);
+                return _userBudgets;
+            }
+            set
+            {
+                _userBudgets = value;
+                OnPropertyChanged(nameof(UserBudgets));
+            }
+        }
+        public BudgetModel DifferenceBudget
+        {
+            get
+            {
+                if (_differenceBudget == null)
+                    _differenceBudget = new BudgetModel();
+                return _differenceBudget;
+            }
+            set
+            {
+                _differenceBudget = value;
+                OnPropertyChanged(nameof(DifferenceBudget));
+            }
+        }
+        public ExpenseTypesModel DifferenceType
+        {
+            get
+            {
+                if (_differenceType == null)
+                    _differenceType = new ExpenseTypesModel();
+                return _differenceType;
+            }
+            set
+            {
+                _differenceType = value;
+                OnPropertyChanged(nameof(DifferenceType));
+            }
+        }
+        
+        //private methods
         private void LoadUserExpenses()
         {
             AllExpenses = new ObservableCollection<ExpenseModel>(_dbOperations.GetAllExpenses(_user.Id).OrderBy(x => x.Date));
@@ -142,6 +322,36 @@ namespace Kursovaya_KPO_interface.ViewModel
             foreach (var expense in AllExpenses)
             {
                 expense.ExpenseType = _dbOperations.GetExpenseTypesById(expense.ExpenseTypesId).Name;
+            }
+        }
+
+        private void GetDifference()
+        {
+            Differences = _reportsService.TakeDifferenceOfExpensesSum(_user);
+
+            for(int i = 0; i < Differences.Count; i++)
+            {
+                _budgetService.CreateProperties(UserBudgets[i]);
+                var budgetDifferences = Differences[i];
+
+                for(int j = 0; j < budgetDifferences.Count; j++)
+                {
+                    if (budgetDifferences[j] > 0)
+                    {
+                        Difference = budgetDifferences[j];
+                        DifferenceBudget = UserBudgets[i];
+                        DifferenceType = ExpenseTypes[j];
+                    }
+                }
+            }
+            if (Difference != null)
+            {
+                Warning = $"Категория {DifferenceType.Name} превысила бюджет на {DifferenceBudget.Properties} на {Difference}руб.";
+                Difference = null;
+            }
+            else
+            {
+                Warning = "";
             }
         }
 
@@ -191,6 +401,7 @@ namespace Kursovaya_KPO_interface.ViewModel
         {
             _dbOperations.DeleteExpense(SelectedExpense.Id);
             LoadUserExpenses();
+            GetDifference();
         }
 
         public bool CanExecuteDeleteExpenseCommand(object parameter)
@@ -394,6 +605,7 @@ namespace Kursovaya_KPO_interface.ViewModel
                     break;
             }
             LoadUserExpenses();
+            GetDifference();
             _selectedExpense = null;
         }
 
@@ -406,5 +618,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             return false;
         }
         #endregion
+
+
     }
 }

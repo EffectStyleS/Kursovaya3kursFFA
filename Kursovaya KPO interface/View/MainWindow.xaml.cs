@@ -41,6 +41,8 @@ namespace Kursovaya_KPO_interface.View
             IReportsService reportsService, ITimePeriodService timePeriodService)
         {
             InitializeComponent();
+            //AllowsTransparency = true;
+            //WindowStyle = WindowStyle.SingleBorderWindow;
             Frame = new Frame();
             Frame.Source = new Uri("View/StartMenu.xaml", UriKind.Relative);
             Frame.NavigationUIVisibility = NavigationUIVisibility.Hidden;

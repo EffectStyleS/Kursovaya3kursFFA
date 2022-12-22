@@ -6,12 +6,8 @@
       xmlns:local="clr-namespace:Kursovaya_KPO_interface.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1100"
-      ShowsNavigationUI="False">
-
-    <Page.DataContext>
-        <local:BudgetMenuViewModel></local:BudgetMenuViewModel>
-    </Page.DataContext>
-    
+      ShowsNavigationUI="False"
+      x:Name="budgetMenu">
     
     <Border CornerRadius="10">
 
@@ -37,24 +33,44 @@
 
             </Separator>
 
-            <Button Background="#e4e4e4"
-                        Content="Бюджеты"
-                        Margin="0 15 0 0"
-                        Padding=" 10"
-                        BorderThickness="0"
-                        Style="{StaticResource BaseButtonStyle}">
-            </Button>
+            <StackPanel x:Name="stackPanelMode"
+                Orientation="Horizontal"
+                Margin="0 15 0 348">
+                        
+                <Border CornerRadius="0 10 10 0">
 
-            <Button Background="#e4e4e4"
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                        Content="Мои бюджеты"                            
+                        Padding="150 10 192 10"
+                        Command="{Binding ReadBudgets}"
+                        Click="ButtonReadBudgets_Click"
+                        Style="{StaticResource BaseButtonStyle}"/>
+
+                </Border>
+
+                <Border CornerRadius="10 0 0 10"
+                        Margin="20 0 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
                         Content="Новый бюджет"
-                        Margin="0 14 0 0"
-                        BorderThickness="0" 
-                        Click="BudgetButtonNewBudget_Click"
-                        Padding="10"
-                        Style="{StaticResource BaseButtonStyle}">
-            </Button>
+                        Click="ButtonNewBudget_Click"
+                        Command="{Binding CreateBudget}"
+                        Padding="150 10 179 10"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
-            <StackPanel x:Name="newBudgetSettings" Visibility="Visible">
+                </Border>
+            </StackPanel>
+
+            <StackPanel x:Name="stackPanelNewBudgetSettings"
+                        Margin="0 0 0 73.5">
                 
                 <StackPanel Orientation="Horizontal">
                     
@@ -82,52 +98,20 @@
                                 MaxWidth="140"
                                 BorderThickness="0"
                                 Background="#e4e4e4"
-                                HorizontalContentAlignment="Center">
-                            
-                                <ComboBoxItem IsSelected="True"
-                                              HorizontalContentAlignment="Center"
-                                              HorizontalAlignment="Center"
-                                              VerticalContentAlignment="Center">
+                                HorizontalContentAlignment="Center"
+                                ItemsSource="{Binding TimePeriods}"
+                                SelectedIndex="{Binding SelectedTimePeriodId}">
 
-                                    <TextBlock  Text="Месяц"
-                                                FontSize="32"
-                                                Style="{StaticResource BaseTextBlockStyle}"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Background="Transparent">
-                                    </TextBlock>
-                                
-                                </ComboBoxItem>
-
-                                <ComboBoxItem IsSelected="False"
-                                              HorizontalContentAlignment="Center"
-                                              HorizontalAlignment="Center"
-                                              VerticalContentAlignment="Center">
-
-                                    <TextBlock  Text="Квартал"
-                                                FontSize="32"
-                                                Style="{StaticResource BaseTextBlockStyle}"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Background="Transparent">
-                                    </TextBlock>
-
-                                </ComboBoxItem>
-
-                                <ComboBoxItem IsSelected="False"
-                                              HorizontalContentAlignment="Center"
-                                              HorizontalAlignment="Center"
-                                              VerticalContentAlignment="Center">
-
-                                    <TextBlock  Text="Год"
-                                                FontSize="32"
-                                                Style="{StaticResource BaseTextBlockStyle}"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"
-                                                Background="Transparent">
-                                    </TextBlock>
-
-                                </ComboBoxItem>
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                    <TextBlock 
+                                        Text="{Binding Name}"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        FontSize="28" 
+                                        HorizontalAlignment="Center">
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
 
                             </ComboBox>
                         
@@ -154,8 +138,13 @@
                             </TextBlock>
 
                             <DatePicker Margin="10 0 205 0"
+                                        FontFamily="Montserrat"
+                                        FontSize="28"
                                         VerticalAlignment="Center"
-                                        SelectedDate="10/29/2022"
+                                        FontWeight="Light"
+                                        BorderBrush="{x:Null}"                    
+                                        SelectedDate="{Binding StartDate}"
+                                        DisplayDate="{Binding StartDate}"   
                                         />
 
                         </StackPanel>
@@ -165,8 +154,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal"
-                        Margin="0 14 0 0"
-                        Visibility="Visible">
+                        Margin="0 14 0 0">
 
                     <Border CornerRadius="0 10 10 0"
                             HorizontalAlignment="Left">
@@ -177,8 +165,9 @@
 
                         <Button Content="Запланированные доходы"
                                 BorderThickness="0"
-                                Click="BudgetPlannedIncomes_Click"
                                 Padding="30 10 146 10"
+                                Command="{Binding ToPlannedIncomes}"
+                                CommandParameter="{Binding ElementName=budgetMenu}"
                                 Style="{StaticResource BaseButtonStyle}">
                         </Button>
 
@@ -193,35 +182,280 @@
 
                         <Button Content="Запланированные расходы"
                                 BorderThickness="0"
-                                Click="BudgetPlannedExpenses_Click"
                                 Padding="30 10 125 10"
+                                Command="{Binding ToPlannedExpenses}"
+                                CommandParameter="{Binding ElementName=budgetMenu}"
                                 Style="{StaticResource BaseButtonStyle}">
                         </Button>
 
                     </Border>
 
                 </StackPanel>
-                
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0 0 120 0">
+                    <Border CornerRadius="10"
+                        Margin="0 15 0 0">
+
+                        <Border.Background>
+                            <SolidColorBrush Color="#e4e4e4"/>
+                        </Border.Background>
+
+                        <Button 
+                            Content="Сохранить бюджет"
+                            Padding="10"
+                            Command="{Binding SaveBudget}"                        
+                            Style="{StaticResource BaseButtonStyle}">
+                        </Button>
+                    </Border>
+
+                    <Border CornerRadius="10"
+                        Margin="15 15 0 0">
+
+                        <Border.Background>
+                            <SolidColorBrush Color="#e4e4e4"/>
+                        </Border.Background>
+
+                        <Button 
+                            Content="Отменить"
+                            Padding="10"                            
+                            Command="{Binding Cancel}"                        
+                            Style="{StaticResource BaseButtonStyle}">
+                        </Button>
+                    </Border>
+                </StackPanel>
+
+                <Border CornerRadius="10"
+                        HorizontalAlignment="Center"
+                        Margin="0 15 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Закрыть"
+                            Padding="10"
+                            Click="ButtonClose_Click"
+                            Style="{StaticResource BaseButtonStyle}">
+                    </Button>
+                </Border>
+
+                <TextBlock
+                    Margin="0 30 0 0"
+                    FontSize="22" 
+                    HorizontalAlignment="Center"
+                    TextWrapping="Wrap"
+                    Foreground="Black"
+                    Text="{Binding Path=SaveResult, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource BaseTextBlockStyle}">
+
+                </TextBlock>
+
             </StackPanel>
 
-            <Border CornerRadius="10 0 10 0"
-                    Margin="900 119 0 0">
+            <StackPanel x:Name="stackPanelReadBudgets"
+                        Margin="0 10 0 -30.5">
+                <StackPanel Background="#f4f4f4">
+
+                    <WrapPanel HorizontalAlignment="Center">
+
+                        <TextBlock
+                            Margin="10 0 0 0"
+                            Padding="10"
+                            FontSize="32" 
+                            HorizontalAlignment="Center"
+                            TextWrapping="Wrap"
+                            Foreground="Black"
+                            Text="Бюджет:"
+                            Style="{StaticResource BaseTextBlockStyle}"/>
+
+                        <ComboBox
+                            Margin="15 0 0 0"
+                            BorderThickness="0"
+                            Background="#e4e4e4"
+                            HorizontalContentAlignment="Center"
+                            ItemsSource="{Binding UserBudgets}"
+                            SelectedIndex="{Binding SelectedBudgetId}">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                        Text="{Binding Properties}"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        FontSize="28" 
+                                        HorizontalAlignment="Center">
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+
+                        </ComboBox>
+
+                    </WrapPanel>
+
+                    <Grid Margin="0 10 0 0"
+                          Height="300"
+                          Background="#f4f4f4">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="35"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Padding="0 3 0 3"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource BaseTextBlockStyle}"   
+                            TextAlignment="Center"
+                            Text="Запланированные доходы"
+                            FontSize="24"
+                            />
+
+                        <TextBlock
+                            Padding="0 3 0 3"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource BaseTextBlockStyle}"   
+                            TextAlignment="Center"
+                            FontSize="24"
+                            Text="Запланированные расходы"/>
+
+                        <ListBox
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            ItemsSource="{Binding PlannedIncomes}"
+                            Background="#f4f4f4"
+                            BorderBrush="{x:Null}">
+                            
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="260"/>
+                                            <ColumnDefinition Width="255"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            Style="{StaticResource BaseTextBlockStyle}"   
+                                            TextAlignment="Right"  
+                                            FontSize="22"
+                                            Text="{Binding IncomeType}"/>
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Style="{StaticResource BaseTextBlockStyle}"   
+                                            TextAlignment="Center"
+                                            FontSize="22"
+                                            Text="{Binding Sum}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+
+                        <ListBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            ItemsSource="{Binding PlannedExpenses}"
+                            Background="#f4f4f4"
+                            BorderBrush="{x:Null}">
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="260"/>
+                                            <ColumnDefinition Width="255" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            Style="{StaticResource BaseTextBlockStyle}"   
+                                            TextAlignment="Right"  
+                                            FontSize="22"
+                                            Text="{Binding ExpenseType}"/>
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Style="{StaticResource BaseTextBlockStyle}"   
+                                            TextAlignment="Center"
+                                            FontSize="22"
+                                            Text="{Binding Sum}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+
+                        <TextBlock
+                            Padding="0 3 5 3"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Style="{StaticResource BaseTextBlockStyle}"   
+                            TextAlignment="Right"
+                            Text="Сальдо:"
+                            FontSize="24"
+                            />
+
+                        <TextBlock
+                            Padding="5 3 0 3"
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Style="{StaticResource BaseTextBlockStyle}"   
+                            TextAlignment="Left"
+                            Text="{Binding Saldo}"
+                            FontSize="24"
+                            />
+
+
+                    </Grid>
+                   
+                </StackPanel>
                 
+                <Border CornerRadius="10"
+                        HorizontalAlignment="Center"
+                        Margin="0 15 0 0">
+
+                    <Border.Background>
+                        <SolidColorBrush Color="#e4e4e4"/>
+                    </Border.Background>
+
+                    <Button 
+                            Content="Закрыть"
+                            Padding="10"
+                            Click="ButtonClose_Click"
+                            Style="{StaticResource BaseButtonStyle}">
+                    </Button>
+                </Border>
+
+            </StackPanel>
+           
+            <Border CornerRadius="10 0 10 0"
+                    Margin="900 -12 0 0"
+                    VerticalAlignment="Bottom">
+
                 <Border.Background>
                     <SolidColorBrush Color="#e4e4e4"/>
                 </Border.Background>
 
                 <Button 
-                        Content="Выход"
-                        Click="BudgetButtonExit_Click"
-                        Padding="10"
-                        Style="{StaticResource BaseButtonStyle}">
+                    Content="Выход"
+                    Padding="10"
+                    Command="{Binding ToMainMenu}"
+                    CommandParameter="{Binding ElementName=budgetMenu}"
+                    Style="{StaticResource BaseButtonStyle}">
                 </Button>
 
             </Border>
             
         </StackPanel>
-        
+       
     </Border>
+    
     
 </Page>

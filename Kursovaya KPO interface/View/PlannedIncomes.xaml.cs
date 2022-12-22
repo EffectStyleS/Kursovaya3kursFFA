@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,18 +21,16 @@ namespace Kursovaya_KPO_interface.View
     /// </summary>
     public partial class PlannedIncomes : Page
     {
-        private Uri _budgetMenuUri;
         public PlannedIncomes()
         {
             InitializeComponent();
-            _budgetMenuUri = BudgetMenu.BudgetMenuUri;
+            DataContext = ViewModel.PlannedIncomesViewModel.Instance;
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
-        private void PlannedIncomesButtonExit_Click(object sender, RoutedEventArgs e)
-        {
-            if (_budgetMenuUri == null)
-                _budgetMenuUri = new Uri("View/BudgetMenu.xaml", UriKind.Relative);
-            NavigationService.Navigate(_budgetMenuUri);
-        }
     }
 }

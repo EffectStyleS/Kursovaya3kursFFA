@@ -15,7 +15,6 @@ namespace Kursovaya_KPO_interface.Model
     public class DbDataOperation : IDbCrud
     {
         IDbRepos _db;
-
         public DbDataOperation(IDbRepos db)
         {
             _db = db;
@@ -285,6 +284,11 @@ namespace Kursovaya_KPO_interface.Model
                 .ToList();
         }
 
+        public List<BudgetModel> GetAllBudgets()
+        {
+            return _db.Budget.GetAll().Select(e => new BudgetModel(e)).ToList();
+        }
+
         public List<UserModel> GetAllUsers()
         {
             return _db.User.GetAll().Select(e => new UserModel(e)).ToList();
@@ -439,6 +443,7 @@ namespace Kursovaya_KPO_interface.Model
         }
 
         #endregion
+
         public bool Save()
         {
             if (_db.Save() > 0) return true;

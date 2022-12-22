@@ -21,41 +21,51 @@ namespace Kursovaya_KPO_interface.View
     /// </summary>
     public partial class BudgetMenu : Page
     {
-        private Uri _mainMenuUri;
-        private Uri _plannedIncomesUri;
-        private Uri _plannedExpensesUri;
-        public static Uri BudgetMenuUri { get; set; }
+        private static short _mode = 0;
         public BudgetMenu()
         {
             InitializeComponent();
-            _mainMenuUri = MainMenuViewModel.MainMenuUri; //перенести в vm
-            BudgetMenuUri = new Uri("View/BudgetMenu.xaml", UriKind.Relative);
+            DataContext = BudgetMenuViewModel.Instance;
+            SetVisibilityMode();
+        }      
+
+        private void ButtonNewBudget_Click(object sender, RoutedEventArgs e)
+        {
+            _mode = 1;
+            SetVisibilityMode();
+        }
+        private void ButtonReadBudgets_Click(object sender, RoutedEventArgs e)
+        {
+            _mode = 2;
+            SetVisibilityMode();
+        }
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            _mode = 0;
+            SetVisibilityMode();
         }
 
-        private void BudgetButtonExit_Click(object sender, RoutedEventArgs e)
+        private void SetVisibilityMode()
         {
-            if (_mainMenuUri == null)
-                _mainMenuUri = new Uri("View/MainMenu.xaml", UriKind.Relative);
-            NavigationService.Navigate(_mainMenuUri);
-        }
+            switch (_mode)
+            {
+                case 0:
+                    stackPanelMode.Visibility = Visibility.Visible;
+                    stackPanelNewBudgetSettings.Visibility = Visibility.Collapsed;
+                    stackPanelReadBudgets.Visibility = Visibility.Collapsed;
+                    break;
 
-        private void BudgetPlannedIncomes_Click(object sender, RoutedEventArgs e)
-        {
-            if (_plannedIncomesUri == null)
-                _plannedIncomesUri = new Uri("View/PlannedIncomes.xaml", UriKind.Relative);
-            NavigationService.Navigate(_plannedIncomesUri);
-        }
-
-        private void BudgetPlannedExpenses_Click(object sender, RoutedEventArgs e)
-        {
-            if (_plannedExpensesUri == null)
-                _plannedExpensesUri = new Uri("View/PlannedExpenses.xaml", UriKind.Relative);
-            NavigationService.Navigate(_plannedExpensesUri);
-        }
-
-        private void BudgetButtonNewBudget_Click(object sender, RoutedEventArgs e)
-        {
-            newBudgetSettings.Visibility = Visibility.Visible;
+                case 1:
+                    stackPanelMode.Visibility = Visibility.Collapsed;
+                    stackPanelNewBudgetSettings.Visibility = Visibility.Visible;
+                    stackPanelReadBudgets.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    stackPanelMode.Visibility = Visibility.Collapsed;
+                    stackPanelNewBudgetSettings.Visibility = Visibility.Collapsed;
+                    stackPanelReadBudgets.Visibility = Visibility.Visible;
+                    break;
+            }
         }
     }
 }

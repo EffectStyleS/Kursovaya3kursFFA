@@ -23,5 +23,8 @@ namespace Kursovaya_KPO_interface.Model.Models
         public System.DateTime StartDate { get; set; }
         public int TimePeriodId { get; set; }
         public int UserId { get; set; }
+
+        public string Properties { get; set; }
+
     }
 }

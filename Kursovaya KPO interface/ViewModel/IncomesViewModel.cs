@@ -327,7 +327,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public void ExecuteAddIncomeTypesIdCommand(object parameter)
         {            
-            _selectedIncome.IncomeTypesId = SelectedIncomeTypesId + 1; //из-за моей тупизны я задал в бд айдишник с единицы(для всех ъуъ сущностей)
+            _selectedIncome.IncomeTypesId = SelectedIncomeTypesId + 1;  //из-за комбобокса, там индексы с нуля
         }
 
         public bool CanExecuteAddIncomeTypesIdCommand(object parameter)

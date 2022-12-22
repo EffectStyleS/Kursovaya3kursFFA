@@ -3,15 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Kursovaya_KPO_interface.ViewModel"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1100"
-      ShowsNavigationUI="False">
+      ShowsNavigationUI="False"
+      x:Name="plannedExpenses">
 
-    <Page.DataContext>
-        <local:PlanndexExpensesViewModel></local:PlanndexExpensesViewModel>
-    </Page.DataContext>
-    
     <Border CornerRadius="10">
 
         <Border.Background>
@@ -28,7 +24,7 @@
                            Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <TextBlock Text="Расходы месяца с 29.10.2022" 
+                <TextBlock Text="Запланированные расходы" 
                            FontSize="36" 
                            HorizontalAlignment="Center"
                            Style="{StaticResource BaseTextBlockStyle}">
@@ -38,49 +34,61 @@
 
                 </Separator>
 
-                <DataGrid HorizontalContentAlignment="Center"
-                          HorizontalAlignment="Center"
-                          BorderBrush="{x:Null}"
-                          Margin="0 15 0 0"
-                          Background="#e4e4e4"                          
-                          Padding="0 0 0 275">
 
-                    <DataGrid.Columns>
+                <ListBox 
+                    ItemsSource="{Binding PlannedExpenses}"
+                    Background="#f4f4f4"
+                    BorderBrush="{x:Null}"
+                    Height="350">
 
-                        <DataGridTextColumn FontFamily="Montserrat" FontWeight="Light" Width="*" Header="Тип"></DataGridTextColumn>
-                        <DataGridTextColumn FontFamily="Montserrat" FontWeight="Light" Width="*" Header="Сумма"></DataGridTextColumn>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock
+                                        Grid.Column="0"
+                                        Style="{StaticResource BaseTextBlockStyle}"   
+                                        TextAlignment="Right"
+                                        Width="550"
+                                        FontSize="24"
+                                        Text="{Binding ExpenseType}"/>
+                                <Border 
+                                    Grid.Column="1"
+                                    CornerRadius="5" 
+                                    BorderBrush="Black"
+                                    BorderThickness="0"
+                                    Margin="20 0 0 0">
 
-                    </DataGrid.Columns>
-
-                </DataGrid>
-
-                <StackPanel Orientation="Horizontal"
-                            Background="#e4e4e4"
-                            >
-
-                    <TextBlock Text="Всего:"
-                               Margin="435 0 0 0"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               FontSize="32"
-                               Style="{StaticResource BaseTextBlockStyle}"
-                               Padding="6">
-                    </TextBlock>
-
-                    <TextBox Margin="10 0 0 0"
-                             FontSize="32"
-                             FontFamily="Montserrat"
-                             FontWeight="Light"
-                             Background="Transparent"
-                             BorderThickness="1 0 0 0"
-                             MaxWidth="560"/>
-
-                </StackPanel>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
+                                            <GradientStop Color="#e4e4e4"  Offset="0"/>
+                                            <GradientStop Color="#f4f4f4"  Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <TextBox
+                                        Margin="5 0 0 0"                                        
+                                        TextAlignment="Left"
+                                        FontSize="24"
+                                        Width="400"
+                                        FontFamily="Montserrat"
+                                        FontWeight="Light"
+                                        Background="Transparent"
+                                        BorderBrush="{x:Null}"
+                                        PreviewTextInput="NumberValidationTextBox"
+                                        Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Margin="0 33 0 0">
+                        Margin="0 50 0 0">
 
                 <Border 
                         CornerRadius="0 10 0 10">
@@ -92,12 +100,13 @@
                     <Button 
                             Content="Сохранить"
                             Padding="30 15 30 14"
+                            Command="{Binding SavePlannedExpenses}"
                             Style="{StaticResource BaseButtonStyle}">
                     </Button>
 
                 </Border>
 
-                <Border Margin="705 0 0 0"
+                <Border Margin="706 0 0 0"
                         CornerRadius="10 0 10 0">
 
                     <Border.Background>
@@ -105,10 +114,11 @@
                     </Border.Background>
 
                     <Button 
-                            Content="Выйти"
-                            Padding="53 15 50 14"
-                            Click="PlannedExpensesButtonExit_Click"
-                            Style="{StaticResource BaseButtonStyle}">
+                        Content="Выйти"
+                        Command="{Binding ToBudgetMenu}"
+                        CommandParameter="{Binding ElementName=plannedExpenses}"
+                        Padding="53 15 50 14"
+                        Style="{StaticResource BaseButtonStyle}">
                     </Button>
 
                 </Border>
@@ -118,5 +128,5 @@
         </StackPanel>
 
     </Border>
-    
+
 </Page>

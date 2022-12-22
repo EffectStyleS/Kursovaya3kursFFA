@@ -418,8 +418,18 @@
                 </Border>
             </StackPanel>
 
+            <TextBlock
+                    Margin="0 10 0 0"
+                    FontSize="20" 
+                    HorizontalAlignment="Center"
+                    TextWrapping="Wrap"
+                    Foreground="DarkRed"
+                    Text="{Binding Path=Warning, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource BaseTextBlockStyle}">
 
-            <Border Margin="950 19 0 0"
+            </TextBlock>
+
+            <Border Margin="950 -14.5 0 0"
                     CornerRadius="10 0 10 0">
 
                 <Border.Background>

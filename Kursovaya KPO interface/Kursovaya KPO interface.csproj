@@ -107,7 +107,7 @@
     <Compile Include="ViewModel\IncomesViewModel.cs" />
     <Compile Include="ViewModel\MainMenuViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\PlanndexExpensesViewModel.cs" />
+    <Compile Include="ViewModel\PlannedExpensesViewModel.cs" />
     <Compile Include="ViewModel\PlannedIncomesViewModel.cs" />
     <Compile Include="ViewModel\StartMenuViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

@@ -18,8 +18,7 @@ namespace Kursovaya_KPO_interface.ViewModel
     {
        
         IUserService _userService;
-        UserModel _currentUser;
-        
+        UserModel _currentUser;       
         string _enterResult;
 
         public static UserModel SelectedUser { get; set; }

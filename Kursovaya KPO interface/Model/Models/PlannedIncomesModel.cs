@@ -27,5 +27,6 @@ namespace Kursovaya_KPO_interface.Model.Models
         public Nullable<decimal> Sum { get; set; }
         public int IncomeTypesId { get; set; }
         public int BudgetId { get; set; }
+        public string IncomeType { get; set; }
     }
 }
