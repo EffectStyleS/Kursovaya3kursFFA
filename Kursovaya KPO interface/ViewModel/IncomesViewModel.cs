@@ -20,28 +20,35 @@ namespace Kursovaya_KPO_interface.ViewModel
         public static Uri IncomesUri { get; set; }
 
         //private fields
-        short _mode;
-        string _greeting;       
-        Uri _mainMenuUri;
-        IDbCrud _dbOperations;
-        ObservableCollection<IncomeModel> _allIncomes;
-        UserModel _user;
-        List<IncomeTypesModel> _incomeTypes;
-        DateTime _startDate;
-        IncomeModel _selectedIncome;
-        int _selectedIncomeTypesId;
+        private short _mode;
+        private string _greeting;       
+        private Uri _mainMenuUri;
+        private IDbCrud _dbOperations;
+        private ObservableCollection<IncomeModel> _allIncomes;
+        private UserModel _user;
+        private List<IncomeTypesModel> _incomeTypes;
+        private DateTime _startDate;
+        private IncomeModel _selectedIncome;
+        private int _selectedIncomeTypesId;
+        private List<UserModel> _users;
+        private Visibility _adminMode;
+        private UserModel _readableUser;
+        private int _selectedUserId;
 
         //ctors
         public IncomesViewModel()
         {
-            _user         = StartMenuViewModel.SelectedUser;
-            Greeting      = _user.Name;
+            _user         = StartMenuViewModel.SelectedUser;            
             _mainMenuUri  = MainMenuViewModel.MainMenuUri;
             IncomesUri    = MainMenuViewModel.IncomesUri;
             _dbOperations = App.MyMainWindow.CrudDb;
-            _incomeTypes  = _dbOperations.GetAllIncomeTypes();
-            _startDate    = DateTime.Today;
+            IncomeTypes  = _dbOperations.GetAllIncomeTypes();
+            StartDate    = DateTime.Today;
+            ReadableUser = _user;
 
+            SelectedUserId = Users.IndexOf(ReadableUser);
+
+            SetGreeting();
             LoadUserIncomes();
         }
 
@@ -56,7 +63,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             }
             set
             {
-                _greeting = "Доходы пользователя " + value;
+                _greeting = value;
                 OnPropertyChanged("Greeting");
             }
         }
@@ -134,16 +141,87 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged("SelectedIncomeTypesId");
             }
         }
+        public List<UserModel> Users
+        {
+            get
+            {
+                if (_users == null)
+                    _users = _dbOperations.GetAllUsers();
+                return _users;
+            }
+            set
+            {
+                _users = value;
+                OnPropertyChanged(nameof(Users));
+            }
+        }
+        public UserModel ReadableUser
+        {
+            get
+            {
+                if (_readableUser == null)
+                    _readableUser = new UserModel();
+                return _readableUser;
+            }
+            set
+            {
+                _readableUser = value;
+                OnPropertyChanged(nameof(ReadableUser));
+            }
+        }
+        public Visibility AdminMode
+        {
+            get
+            {
+                if (_user.Role == 0)
+                    _adminMode = Visibility.Visible;
+                else
+                    _adminMode = Visibility.Collapsed;
+                return _adminMode;
+            }
+            set
+            {
+                _adminMode = value;
+                OnPropertyChanged(nameof(AdminMode));
+            }
+        }
+        public int SelectedUserId
+        {
+            get
+            {
+                return _selectedUserId;
+            }
+            set
+            {
+                _selectedUserId = value;
+                if (value > 0)
+                {
+                    ReadableUser = Users[SelectedUserId];
+                    LoadUserIncomes();
+                }                   
+                OnPropertyChanged(nameof(SelectedUserId));
+            }
+        }
 
         //public methods
         private void LoadUserIncomes()
         {
-            AllIncomes = new ObservableCollection<IncomeModel>(_dbOperations.GetAllIncomes(_user.Id).OrderBy(x => x.Date));
-
+            if (_user.Role == 1)
+                AllIncomes = new ObservableCollection<IncomeModel>(_dbOperations.GetAllIncomes(_user.Id).OrderBy(x => x.Date));
+            if (_user.Role == 0)
+                AllIncomes = new ObservableCollection<IncomeModel>(_dbOperations.GetAllIncomes(ReadableUser.Id).OrderBy(x => x.Date));
+            
             foreach (var income in AllIncomes)
             {
                 income.IncomeType = _dbOperations.GetIncomeTypesById(income.IncomeTypesId).Name;
             }
+        }
+        private void SetGreeting()
+        {
+            if (_user.Role == 0)
+                Greeting = "Доходы пользователей";
+            else
+                Greeting = "Доходы пользователя" + _user.Name;
         }
 
         //commands regions
@@ -196,7 +274,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteDeleteIncomeCommand(object parameter)
         {
-            if(SelectedIncome == null)
+            if (SelectedIncome != null && ReadableUser.Id != _user.Id)
                 return false;
             return true;
         }
@@ -228,6 +306,8 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteCreateIncomeCommand(object parameter)
         {
+            if (ReadableUser.Id != _user.Id)
+                return false;
             return true;
         }
         #endregion
@@ -254,9 +334,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteUpdateIncomeCommand(object parameter)
         {
-            if (SelectedIncome != null)
-                return true;
-            return false;
+            if (SelectedIncome != null && ReadableUser.Id != _user.Id)
+                return false;
+            return true;
         }
         #endregion
 

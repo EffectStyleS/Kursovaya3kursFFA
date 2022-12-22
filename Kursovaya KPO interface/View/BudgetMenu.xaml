@@ -35,8 +35,7 @@
 
             <StackPanel x:Name="stackPanelMode"
                 Orientation="Horizontal"
-                Margin="0 15 0 348"
-                        Visibility="Collapsed">
+                Margin="0 15 0 348">
                         
                 <Border CornerRadius="0 10 10 0">
 
@@ -71,8 +70,7 @@
             </StackPanel>
 
             <StackPanel x:Name="stackPanelNewBudgetSettings"
-                        Margin="0 0 0 73.5"
-                        Visibility="Collapsed">
+                        Margin="0 0 0 73.5">
                 
                 <StackPanel Orientation="Horizontal">
                     
@@ -197,6 +195,7 @@
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Center"
                             Margin="0 0 120 0">
+                    
                     <Border CornerRadius="10"
                         Margin="0 15 0 0">
 
@@ -208,6 +207,23 @@
                             Content="Сохранить бюджет"
                             Padding="10"
                             Command="{Binding SaveBudget}"                        
+                            Style="{StaticResource BaseButtonStyle}">
+                        </Button>
+                    </Border>
+
+                    <Border CornerRadius="10"
+                        Margin="15 15 0 0"
+                        Visibility="{Binding AdminMode}">
+
+                        <Border.Background>
+                            <SolidColorBrush Color="#e4e4e4"/>
+                        </Border.Background>
+
+                        <Button 
+                            Content="Сохранить бюджет как семейный"
+                            Padding="10 10 10 10"
+                            
+                            Command="{Binding SaveFamilyBudget}"                        
                             Style="{StaticResource BaseButtonStyle}">
                         </Button>
                     </Border>
@@ -262,6 +278,39 @@
                 <StackPanel Background="#f4f4f4">
 
                     <WrapPanel HorizontalAlignment="Center">
+
+                        <TextBlock
+                            Margin="10 0 0 0"
+                            Padding="10"
+                            FontSize="26" 
+                            HorizontalAlignment="Center"
+                            TextWrapping="Wrap"
+                            Foreground="Black"
+                            Text="Пользователь:"
+                            Style="{StaticResource BaseTextBlockStyle}"
+                            Visibility="{Binding AdminMode}"/>
+
+                        <ComboBox
+                            Margin="0 0 10 0"
+                            BorderThickness="0"
+                            Background="#e4e4e4"
+                            HorizontalContentAlignment="Center"
+                            ItemsSource="{Binding Users}"
+                            SelectedIndex="{Binding SelectedUserId}"
+                            Visibility="{Binding AdminMode}">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                        Text="{Binding Name}"
+                                        Style="{StaticResource BaseTextBlockStyle}"
+                                        FontSize="26" 
+                                        HorizontalAlignment="Center">   
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
 
                         <TextBlock
                             Margin="10 0 0 0"
@@ -461,7 +510,8 @@
                     <SolidColorBrush Color="#e4e4e4"/>
                 </Border.Background>
 
-                <Button 
+                <Button
+                    x:Name="buttonToMainMenu"
                     Content="Выход"
                     Padding="10"
                     Command="{Binding ToMainMenu}"

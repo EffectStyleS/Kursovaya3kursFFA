@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -18,8 +19,9 @@ namespace Kursovaya_KPO_interface.ViewModel
         //events
         private delegate void FillPlannedExpensesAndIncomes();
         private event FillPlannedExpensesAndIncomes OnSelectingBudget;
+
         //static fields
-        public static BudgetMenuViewModel Instance { get; } = new BudgetMenuViewModel();
+        public static BudgetMenuViewModel Instance{ get; } = new BudgetMenuViewModel();
         public static Uri BudgetMenuUri { get; set; }
         public static Uri PlannedExpensesUri { get; set; }
         public static Uri PlannedIncomesUri { get; set; }
@@ -45,6 +47,10 @@ namespace Kursovaya_KPO_interface.ViewModel
         private IPlannedExpensesService _plannedExpensesService;
         private IPlannedIncomesService _plannedIncomesService;
         private string _filePath;
+        private List<UserModel> _users;
+        private Visibility _adminMode;
+        private UserModel _readableUser;
+        private int _selectedUserId;
 
         //ctors
         public BudgetMenuViewModel()
@@ -62,7 +68,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             PlannedExpensesViewModel.Instance.OnSave += TakePlannedExpenses;
             PlannedIncomesViewModel.Instance.OnSave  += TakePlannedIncomes;
 
-            OnSelectingBudget += LoadBudgetProperties;
+            OnSelectingBudget += LoadUserBudgets;
         }
 
         //public properties
@@ -253,26 +259,100 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged(nameof(FilePath));
             }
         }
+        public List<UserModel> Users
+        {
+            get
+            {
+                if (_users == null)
+                    _users = _dbOperations.GetAllUsers();
+                return _users;
+            }
+            set
+            {
+                _users = value;
+                OnPropertyChanged(nameof(Users));
+            }
+        }
+        public UserModel ReadableUser
+        {
+            get
+            {
+                if (_readableUser == null)
+                    _readableUser = new UserModel();
+                return _readableUser;
+            }
+            set
+            {
+                _readableUser = value;
+                OnPropertyChanged(nameof(ReadableUser));
+            }
+        }
+        public Visibility AdminMode
+        {
+            get
+            {
+                if (_user.Role == 0)
+                    _adminMode = Visibility.Visible;
+                else
+                    _adminMode = Visibility.Collapsed;
+                return _adminMode;
+            }
+            set
+            {
+                _adminMode = value;
+                OnPropertyChanged(nameof(AdminMode));
+            }
+        }
+        public int SelectedUserId
+        {
+            get
+            {
+                return _selectedUserId;
+            }
+            set
+            {
+                _selectedUserId = value;
+                if (value > -1)
+                {
+                    ReadableUser = Users[SelectedUserId];
+                    UserBudgets = _dbOperations.GetAllUserBudgets(ReadableUser.Id);
+                    SelectedBudgetId = 0;
+                }
+                OnPropertyChanged(nameof(SelectedUserId));
+            }
+        }
 
         //private methods
-        private void LoadBudgetProperties()
+        private void LoadUserBudgets()
         {
-            PlannedExpenses = _dbOperations.GetAllBudgetsPlannedExpenses(UserBudgets[SelectedBudgetId].Id);
-            for (int i = 0; i < PlannedExpenses.Count; i++)
+            if(UserBudgets.Count == 0)
             {
-                PlannedExpenses[i].ExpenseType = ExpenseTypes[i].Name;
+                PlannedExpenses = null;
+                PlannedIncomes = null;
+                Saldo = 0.0m;
             }
 
-            PlannedIncomes = _dbOperations.GetAllBudgetsPlannedIncomes(UserBudgets[SelectedBudgetId].Id);
-            for (int i = 0; i < PlannedIncomes.Count; i++)
+            else
             {
-                PlannedIncomes[i].IncomeType = IncomeTypes[i].Name;
-            }
+                PlannedExpenses = _dbOperations.GetAllBudgetsPlannedExpenses(UserBudgets[SelectedBudgetId].Id);
 
-            Saldo = _plannedIncomesService.GetSumOfAllPlannedIncomes(PlannedIncomes)
-                - _plannedExpensesService.GetSumOfAllPlannedExpenses(PlannedExpenses);
+                for (int i = 0; i < PlannedExpenses.Count; i++)
+                {
+                    PlannedExpenses[i].ExpenseType = ExpenseTypes[i].Name;
+                }
+
+                PlannedIncomes = _dbOperations.GetAllBudgetsPlannedIncomes(UserBudgets[SelectedBudgetId].Id);
+                for (int i = 0; i < PlannedIncomes.Count; i++)
+                {
+                    PlannedIncomes[i].IncomeType = IncomeTypes[i].Name;
+                }
+
+                Saldo = _plannedIncomesService.GetSumOfAllPlannedIncomes(PlannedIncomes)
+                    - _plannedExpensesService.GetSumOfAllPlannedExpenses(PlannedExpenses);
+            }
             
         }
+
 
         //public methods
 
@@ -384,8 +464,9 @@ namespace Kursovaya_KPO_interface.ViewModel
         public void ExecuteCreateBudgetCommand(object parameter)
         {
             _mode = 1;
+            _user = StartMenuViewModel.SelectedUser;
 
-            _newBudget = new BudgetModel()
+            NewBudget = new BudgetModel()
             {
                 UserId = _user.Id
             };
@@ -414,13 +495,23 @@ namespace Kursovaya_KPO_interface.ViewModel
         }
 
         public void ExecuteReadBudgetsCommand(object parameter)
-        {           
+        {
+            _user = StartMenuViewModel.SelectedUser;
+
             PlannedExpenses = null;
             PlannedIncomes = null;
-            UserBudgets = _dbOperations.GetAllUserBudgets(_user.Id);
-            SelectedBudgetId = 0;
-            _mode = 2;
 
+            ReadableUser = _user;
+            SelectedUserId = Users.IndexOf(ReadableUser);
+
+            if (_user.Role != 0)
+            {
+                UserBudgets = _dbOperations.GetAllUserBudgets(_user.Id);
+                SelectedBudgetId = 0;
+            }
+
+
+            _mode = 2;           
         }
 
         public bool CanExecuteReadBudgetsCommand(object parameter)
@@ -495,6 +586,9 @@ namespace Kursovaya_KPO_interface.ViewModel
                 }
 
                 SaveResult = "Бюджет сохранён";
+                NewBudget = null;
+                PlannedExpenses = null;
+                PlannedIncomes = null;
             }
             else if(PlannedIncomes == null)
             {
@@ -511,6 +605,68 @@ namespace Kursovaya_KPO_interface.ViewModel
             return true;
         }
         #endregion
+
+        #region SaveFamilyBudget
+
+        RelayCommand _saveFamilyBudget;
+        public ICommand SaveFamilyBudget
+        {
+            get
+            {
+                if (_saveFamilyBudget == null)
+                    _saveFamilyBudget = new RelayCommand(ExecuteSaveFamilyBudgetCommand, CanExecuteSaveFamilyBudgetCommand);
+                return _saveFamilyBudget;
+            }
+        }
+
+        public void ExecuteSaveFamilyBudgetCommand(object parameter)
+        {
+            if (PlannedExpenses != null && PlannedIncomes != null)
+            {
+                foreach (var user in Users)
+                {
+                    NewBudget.StartDate = StartDate;
+                    NewBudget.TimePeriodId = SelectedTimePeriodId + 1; //из-за комбобокса, там индексы с нуля
+                    NewBudget.UserId = user.Id;
+
+                    _dbOperations.CreateBudget(NewBudget);
+                    var newBudgetId = _dbOperations.GetAllBudgets().Last().Id;
+
+                    foreach (PlannedExpensesModel plannedExpense in PlannedExpenses)
+                    {
+                        plannedExpense.BudgetId = newBudgetId;
+                        _dbOperations.CreatePlannedExpense(plannedExpense);
+                    }
+
+                    foreach (PlannedIncomesModel plannedIncome in PlannedIncomes)
+                    {
+                        plannedIncome.BudgetId = newBudgetId;
+                        _dbOperations.CreatePlannedIncome(plannedIncome);
+                    }
+                }
+
+                SaveResult = "Бюджет сохранён";
+                NewBudget = null;
+                PlannedExpenses = null;
+                PlannedIncomes = null;
+            }
+            else if (PlannedIncomes == null)
+            {
+                SaveResult = "Не заполнены запланированные доходы";
+            }
+            else
+            {
+                SaveResult = "Не заполнены запланированные расходы";
+            }
+        }
+
+        public bool CanExecuteSaveFamilyBudgetCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+
 
         #region Cancel
 

@@ -19,6 +19,7 @@ using iText.Kernel.Colors;
 using iText.IO.Font;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
+using System.Windows.Controls;
 
 namespace Kursovaya_KPO_interface.Model.Services
 {
@@ -92,15 +93,9 @@ namespace Kursovaya_KPO_interface.Model.Services
             LineSeparator ls = new LineSeparator(new SolidLine());
             document.Add(ls);
 
-            Rectangle[] columns = new Rectangle[] {
-                 new Rectangle(30, 0, 200, 600), // coordinates of first column
-                 new Rectangle(300, 0, 200, 600) // coordinates of second column
-            };
-
-            document.SetRenderer(new ColumnDocumentRenderer(document, columns));
-
             #region PlannedExpensesTable
             Table plannedExpensesTable = new Table(2, false)
+                .SetMarginTop(10)
                 .SetHorizontalBorderSpacing(5);
 
             Cell cellPlannedExpensesHeader = new Cell(1, 2)
@@ -152,6 +147,8 @@ namespace Kursovaya_KPO_interface.Model.Services
             }
             document.Add(plannedExpensesTable);
             #endregion
+
+            document.Add(new AreaBreak(AreaBreakType.NEXT_PAGE));
 
             #region PlannedIncomesTable
             Table plannedIncomesTable = new Table(2, false)

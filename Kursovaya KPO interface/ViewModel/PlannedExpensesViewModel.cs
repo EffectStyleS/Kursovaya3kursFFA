@@ -117,7 +117,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public void ExecuteSavePlannedExpensesCommand(object parameter)
         {
-            OnSave(PlannedExpenses);
+            OnSave?.Invoke(PlannedExpenses);
         }
 
         public bool CanExecuteSavePlannedExpensesCommand(object parameter)

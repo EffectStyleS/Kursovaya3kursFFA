@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -19,42 +20,45 @@ namespace Kursovaya_KPO_interface.ViewModel
         public static Uri ExpensesUri { get; set; }
 
         //private fields
-        short _mode;
-        string _greeting;
-        Uri _mainMenuUri;
-        IDbCrud _dbOperations;
-        ObservableCollection<ExpenseModel> _allExpenses;
-        UserModel _user;
-        List<ExpenseTypesModel> _expenseTypes;
-        DateTime _startDate;
-        ExpenseModel _selectedExpense;
-        int _selectedExpenseTypesId;
+        private short _mode;
+        private string _greeting;
+        private Uri _mainMenuUri;
+        private IDbCrud _dbOperations;
+        private ObservableCollection<ExpenseModel> _allExpenses;
+        private UserModel _user;
+        private List<ExpenseTypesModel> _expenseTypes;
+        private DateTime _startDate;
+        private ExpenseModel _selectedExpense;
+        private int _selectedExpenseTypesId;
         private string _warning;
-        //private List<ExpenseModel> _expensesByType;
-        //private List<decimal?> _sumOfValuesExpensesByType;
-        //private decimal? _sumOfExpensesByType;
         private List<BudgetModel> _userBudgets;
-        //private List<PlannedExpensesModel> _plannedExpenses;
-        //private List<decimal?> _budgetValuesOfPlannedExpenses;
-        IReportsService _reportsService;
-        IBudgetService _budgetService;
+        private IReportsService _reportsService;
+        private IBudgetService _budgetService;
         private List<List<decimal?>> _differences;
         private decimal? _difference;
         private BudgetModel _differenceBudget;
         private ExpenseTypesModel _differenceType;
+        private List<UserModel> _users;
+        private Visibility _adminMode;
+        private UserModel _readableUser;
+        private int _selectedUserId;
 
         //ctors
         public ExpensesViewModel()
         {
             _user           = StartMenuViewModel.SelectedUser;
-            Greeting        = _user.Name;
             _mainMenuUri    = MainMenuViewModel.MainMenuUri;
             ExpensesUri     = MainMenuViewModel.ExpensesUri;
             _dbOperations   = App.MyMainWindow.CrudDb;
-            _expenseTypes   = _dbOperations.GetAllExpenseTypes();
-            _startDate      = DateTime.Today;            
+            ExpenseTypes    = _dbOperations.GetAllExpenseTypes();
+            StartDate       = DateTime.Today;            
             _reportsService = App.MyMainWindow.ReportsService;
             _budgetService  = App.MyMainWindow.BudgetService;
+            ReadableUser    = _user;
+
+            SelectedUserId = Users.IndexOf(ReadableUser);
+
+            SetGreeting();
             LoadUserExpenses();
             GetDifference();
         }
@@ -70,7 +74,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             }
             set
             {
-                _greeting = "Расходы пользователя " + value;
+                _greeting = value;
                 OnPropertyChanged("Greeting");
             }
         }
@@ -161,90 +165,7 @@ namespace Kursovaya_KPO_interface.ViewModel
                 _warning = value;
                 OnPropertyChanged(nameof(Warning));
             }
-        }
-
-        //public List<ExpenseModel> ExpensesByType
-        //{
-        //    get
-        //    {
-        //        if (_expensesByType == null)
-        //            _expensesByType = new List<ExpenseModel>();
-        //        return _expensesByType;
-        //    }
-        //    set
-        //    {
-        //        _expensesByType = value;
-        //        OnPropertyChanged(nameof(ExpensesByType));
-        //    }
-        //}
-        //public List<decimal?> SumOfValuesExpensesByType
-        //{
-        //    get
-        //    {
-        //        if(_sumOfValuesExpensesByType == null)
-        //            _sumOfValuesExpensesByType = new List<decimal?>();
-        //        return _sumOfValuesExpensesByType;
-        //    }
-        //    set
-        //    {
-        //        _sumOfValuesExpensesByType = value;
-        //        OnPropertyChanged(nameof(SumOfValuesExpensesByType));
-        //    }
-        //}
-        //public decimal? SumOfExpensesByType
-        //{
-        //    get 
-        //    {
-        //        return _sumOfExpensesByType;
-        //    }
-        //    set
-        //    {
-        //        _sumOfExpensesByType= value;
-        //        OnPropertyChanged(nameof(SumOfExpensesByType));
-        //    }
-        //}
-        //public List<BudgetModel> UserBudgets
-        //{
-        //    get
-        //    {
-        //        if (_userBudgets == null)
-        //            _userBudgets = _dbOperations.GetAllUserBudgets(_user.Id);
-        //        return _userBudgets;
-        //    }
-        //    set
-        //    {
-        //        _userBudgets = value;
-        //        OnPropertyChanged(nameof(UserBudgets));
-        //    }
-        //}
-        //public List<PlannedExpensesModel> PlannedExpenses
-        //{
-        //    get
-        //    {
-        //        return _plannedExpenses;
-        //    }
-        //    set
-        //    {
-        //        _plannedExpenses = value;
-        //        OnPropertyChanged(nameof(PlannedExpenses));
-        //    }
-        //}
-        //public List<decimal?> BudgetValuesOfPlannedExpenses
-        //{
-        //    get
-        //    {
-        //        if (_budgetValuesOfPlannedExpenses == null)
-        //            _budgetValuesOfPlannedExpenses = new List<decimal?>();
-        //        return _budgetValuesOfPlannedExpenses;
-        //    }
-        //    set
-        //    {
-        //        _budgetValuesOfPlannedExpenses = value;
-        //        OnPropertyChanged(nameof(BudgetValuesOfPlannedExpenses));
-        //    }
-        //}
-     
-       
+        }               
         public List<List<decimal?>> Differences
         {
             get
@@ -313,18 +234,88 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged(nameof(DifferenceType));
             }
         }
-        
+        public List<UserModel> Users
+        {
+            get
+            {
+                if (_users == null)
+                    _users = _dbOperations.GetAllUsers();
+                return _users;
+            }
+            set
+            {
+                _users = value;
+                OnPropertyChanged(nameof(Users));
+            }
+        }
+        public UserModel ReadableUser
+        {
+            get
+            {
+                if (_readableUser == null)
+                    _readableUser = new UserModel();
+                return _readableUser;
+            }
+            set
+            {
+                _readableUser = value;
+                OnPropertyChanged(nameof(ReadableUser));
+            }
+        }
+        public Visibility AdminMode
+        {
+            get
+            {
+                if (_user.Role == 0)
+                    _adminMode = Visibility.Visible;
+                else
+                    _adminMode = Visibility.Collapsed;
+                return _adminMode;
+            }
+            set
+            {
+                _adminMode = value;
+                OnPropertyChanged(nameof(AdminMode));
+            }
+        }
+        public int SelectedUserId
+        {
+            get
+            {
+                return _selectedUserId;
+            }
+            set
+            {
+                _selectedUserId = value;
+                if (value > -1)
+                {
+                    ReadableUser = Users[SelectedUserId];
+                    LoadUserExpenses();
+                }
+                OnPropertyChanged(nameof(SelectedUserId));
+            }
+        }
+                     
         //private methods
         private void LoadUserExpenses()
         {
-            AllExpenses = new ObservableCollection<ExpenseModel>(_dbOperations.GetAllExpenses(_user.Id).OrderBy(x => x.Date));
+            if(_user.Role == 1)
+                AllExpenses = new ObservableCollection<ExpenseModel>(_dbOperations.GetAllExpenses(_user.Id).OrderBy(x => x.Date));
+            if(_user.Role == 0)
+                AllExpenses = new ObservableCollection<ExpenseModel>(_dbOperations.GetAllExpenses(ReadableUser.Id).OrderBy(x => x.Date));
 
             foreach (var expense in AllExpenses)
             {
                 expense.ExpenseType = _dbOperations.GetExpenseTypesById(expense.ExpenseTypesId).Name;
             }
         }
-
+        private void SetGreeting()
+        {
+            if (_user.Role == 0)
+                Greeting = "Расходы пользователей";
+            else
+                Greeting = "Расходы пользователя" + _user.Name;
+        }
         private void GetDifference()
         {
             Differences = _reportsService.TakeDifferenceOfExpensesSum(_user);
@@ -344,15 +335,14 @@ namespace Kursovaya_KPO_interface.ViewModel
                     }
                 }
             }
+
             if (Difference != null)
             {
                 Warning = $"Категория {DifferenceType.Name} превысила бюджет на {DifferenceBudget.Properties} на {Difference}руб.";
                 Difference = null;
             }
             else
-            {
                 Warning = "";
-            }
         }
 
         //commands regions
@@ -406,7 +396,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteDeleteExpenseCommand(object parameter)
         {
-            if (SelectedExpense == null)
+            if (SelectedExpense != null && ReadableUser.Id != _user.Id)
                 return false;
             return true;
         }
@@ -438,6 +428,8 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteCreateExpenseCommand(object parameter)
         {
+            if (ReadableUser.Id != _user.Id)
+                return false;
             return true;
         }
         #endregion
@@ -464,9 +456,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteUpdateExpenseCommand(object parameter)
         {
-            if (SelectedExpense != null)
-                return true;
-            return false;
+            if (SelectedExpense != null && ReadableUser.Id != _user.Id)
+                return false;
+            return true;
         }
         #endregion
 

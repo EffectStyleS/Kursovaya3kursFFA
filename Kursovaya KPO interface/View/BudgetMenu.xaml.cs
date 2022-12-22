@@ -53,19 +53,23 @@ namespace Kursovaya_KPO_interface.View
                     stackPanelMode.Visibility = Visibility.Visible;
                     stackPanelNewBudgetSettings.Visibility = Visibility.Collapsed;
                     stackPanelReadBudgets.Visibility = Visibility.Collapsed;
+                    buttonToMainMenu.Visibility = Visibility.Visible;
                     break;
 
                 case 1:
                     stackPanelMode.Visibility = Visibility.Collapsed;
                     stackPanelNewBudgetSettings.Visibility = Visibility.Visible;
                     stackPanelReadBudgets.Visibility = Visibility.Collapsed;
+                    buttonToMainMenu.Visibility = Visibility.Collapsed;
                     break;
                 case 2:
                     stackPanelMode.Visibility = Visibility.Collapsed;
                     stackPanelNewBudgetSettings.Visibility = Visibility.Collapsed;
                     stackPanelReadBudgets.Visibility = Visibility.Visible;
+                    buttonToMainMenu.Visibility = Visibility.Collapsed;
                     break;
             }
         }
+
     }
 }
