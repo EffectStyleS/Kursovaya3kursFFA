@@ -15,7 +15,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 {
     public class PlannedIncomesViewModel : ViewModelBase
     {
-        //static fields
+        //static properties
         public static PlannedIncomesViewModel Instance { get; } = new PlannedIncomesViewModel();
 
         //events
@@ -27,8 +27,6 @@ namespace Kursovaya_KPO_interface.ViewModel
         private IDbCrud _dbOperations;
         private List<PlannedIncomesModel> _plannedIncomes;
         private List<IncomeTypesModel> _incomeTypes;
-        //private decimal? _sumOfAllPlannedIncomes;
-        private IPlannedIncomesService _plannedIncomesService;
 
         //ctors
         public PlannedIncomesViewModel()
@@ -36,7 +34,6 @@ namespace Kursovaya_KPO_interface.ViewModel
             _dbOperations = App.MyMainWindow.CrudDb;
             _budgetMenuUri = BudgetMenuViewModel.BudgetMenuUri;
             _incomeTypes = _dbOperations.GetAllIncomeTypes();
-            _plannedIncomesService = App.MyMainWindow.PlannedIncomesService;
         }
 
         //public properties
@@ -75,6 +72,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             }
         }
 
+        //commands regions
         #region ToBudgetMenu
 
         RelayCommand _toBudgetMenu;

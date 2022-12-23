@@ -17,21 +17,21 @@
         
         <StackPanel>
             
-            <TextBlock Text="Family Finance Analysis" 
-                           FontSize="40" 
-                           HorizontalAlignment="Center"
-                           Style="{StaticResource BaseTextBlockStyle}">
+            <TextBlock 
+                Text="Family Finance Analysis" 
+                FontSize="40" 
+                HorizontalAlignment="Center"
+                Style="{StaticResource BaseTextBlockStyle}">
             </TextBlock>
 
-            <TextBlock Text="Меню бюджетов" 
-                           FontSize="36" 
-                           HorizontalAlignment="Center"
-                           Style="{StaticResource BaseTextBlockStyle}">
+            <TextBlock 
+                Text="Меню бюджетов" 
+                FontSize="36" 
+                HorizontalAlignment="Center"
+                Style="{StaticResource BaseTextBlockStyle}">
             </TextBlock>
 
-            <Separator Margin="250,20,250,20">
-
-            </Separator>
+            <Separator Margin="250,20,250,20"/>
 
             <StackPanel x:Name="stackPanelMode"
                 Orientation="Horizontal"
@@ -52,8 +52,9 @@
 
                 </Border>
 
-                <Border CornerRadius="10 0 0 10"
-                        Margin="20 0 0 0">
+                <Border 
+                    CornerRadius="10 0 0 10"
+                    Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
@@ -67,17 +68,19 @@
                         Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
+                
             </StackPanel>
 
             <StackPanel x:Name="stackPanelNewBudgetSettings"
-                        Margin="0 0 0 73.5">
+                Margin="0 0 0 73.5">
                 
                 <StackPanel Orientation="Horizontal">
                     
-                    <Border CornerRadius="0 10 10 0"
-                            Margin="0 14 0 0"
-                            Padding="0 0 108 0"
-                            Width="542">
+                    <Border 
+                        CornerRadius="0 10 10 0"
+                        Margin="0 14 0 0"
+                        Padding="0 0 108 0"
+                        Width="542">
                     
                         <Border.Background>
                             <SolidColorBrush Color="#e4e4e4"/>
@@ -85,12 +88,13 @@
                     
                         <StackPanel Orientation="Horizontal">
 
-                            <TextBlock Text="Период времени:"
-                                       FontSize="32"
-                                       Style="{StaticResource BaseTextBlockStyle}"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Left"
-                                       Margin="10 10 60 10">
+                            <TextBlock 
+                                Text="Период времени:"
+                                FontSize="32"
+                                Style="{StaticResource BaseTextBlockStyle}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Margin="10 10 60 10">
                             </TextBlock>
 
                             <ComboBox
@@ -104,12 +108,13 @@
 
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                    <TextBlock 
+                                        
+                                        <TextBlock 
                                         Text="{Binding Name}"
                                         Style="{StaticResource BaseTextBlockStyle}"
                                         FontSize="28" 
-                                        HorizontalAlignment="Center">
-                                        </TextBlock>
+                                        HorizontalAlignment="Center"/>
+
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
 
@@ -274,7 +279,8 @@
             </StackPanel>
 
             <StackPanel x:Name="stackPanelReadBudgets"
-                        Margin="0 10 0 -30.5">
+                Margin="0 10 0 -30.5">
+                
                 <StackPanel Background="#f4f4f4">
 
                     <WrapPanel HorizontalAlignment="Center">
@@ -343,9 +349,10 @@
 
                         </ComboBox>
 
-                        <Border CornerRadius="10"
-                        HorizontalAlignment="Center"
-                        Margin="50 0 0 0">
+                        <Border 
+                            CornerRadius="10"
+                            HorizontalAlignment="Center"
+                            Margin="50 0 0 0">
 
                             <Border.Background>
                                 <SolidColorBrush Color="#e4e4e4"/>
@@ -361,9 +368,10 @@
 
                     </WrapPanel>
 
-                    <Grid Margin="0 10 0 0"
-                          Height="300"
-                          Background="#f4f4f4">
+                    <Grid 
+                        Margin="0 10 0 0"
+                        Height="300"
+                        Background="#f4f4f4">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -383,8 +391,7 @@
                             Style="{StaticResource BaseTextBlockStyle}"   
                             TextAlignment="Center"
                             Text="Запланированные доходы"
-                            FontSize="24"
-                            />
+                            FontSize="24"/>
 
                         <TextBlock
                             Padding="0 3 0 3"
@@ -409,6 +416,7 @@
                                             <ColumnDefinition Width="260"/>
                                             <ColumnDefinition Width="255"/>
                                         </Grid.ColumnDefinitions>
+                                        
                                         <TextBlock
                                             Grid.Column="0"
                                             Style="{StaticResource BaseTextBlockStyle}"   
@@ -484,27 +492,29 @@
                    
                 </StackPanel>
                 
-                <Border CornerRadius="10"
-                        HorizontalAlignment="Center"
-                        Margin="0 15 0 0">
+                <Border 
+                    CornerRadius="10"
+                    HorizontalAlignment="Center"
+                    Margin="0 15 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
                     <Button 
-                            Content="Закрыть"
-                            Padding="10"
-                            Click="ButtonClose_Click"
-                            Style="{StaticResource BaseButtonStyle}">
+                        Content="Закрыть"
+                        Padding="10"
+                        Click="ButtonClose_Click"
+                        Style="{StaticResource BaseButtonStyle}">
                     </Button>
                 </Border>
 
             </StackPanel>
            
-            <Border CornerRadius="10 0 10 0"
-                    Margin="900 -12 0 0"
-                    VerticalAlignment="Bottom">
+            <Border 
+                CornerRadius="10 0 10 0"
+                Margin="900 -12 0 0"
+                VerticalAlignment="Bottom">
 
                 <Border.Background>
                     <SolidColorBrush Color="#e4e4e4"/>

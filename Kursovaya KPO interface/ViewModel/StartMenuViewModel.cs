@@ -16,12 +16,24 @@ namespace Kursovaya_KPO_interface.ViewModel
 {
     public class StartMenuViewModel : ViewModelBase
     {
-       
-        IUserService _userService;
-        UserModel _currentUser;       
-        string _enterResult;
-
+        //static properties
+        public static Uri StartMenuUri { get; set; }
+        public static Uri MainMenuUri { get; set; }
         public static UserModel SelectedUser { get; set; }
+
+        //private fields
+        private IUserService _userService;
+        private UserModel _currentUser;
+        private string _enterResult;
+
+        //ctors
+        public StartMenuViewModel()
+        {
+            _userService = App.MyMainWindow.UserService;
+            StartMenuUri = new Uri("View/StartMenu.xaml", UriKind.Relative);
+        }
+
+        //public properties
         public UserModel CurrentUser
         {
             get
@@ -41,7 +53,7 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged("CurrentUser");
             }
         }
-        public string EnterResult 
+        public string EnterResult
         {
             get
             {
@@ -57,15 +69,7 @@ namespace Kursovaya_KPO_interface.ViewModel
                 OnPropertyChanged("EnterResult");
             }
         }
-        public static Uri StartMenuUri { get; set; }
-        public static Uri MainMenuUri { get; set; }
-
-        public StartMenuViewModel()
-        {
-            _userService = App.MyMainWindow.UserService;
-            StartMenuUri = new Uri("View/StartMenu.xaml", UriKind.Relative);
-        }
-
+        //commands regions
         #region EnterUser
 
         RelayCommand _enterUser;

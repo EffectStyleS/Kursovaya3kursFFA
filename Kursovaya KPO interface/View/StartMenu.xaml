@@ -26,8 +26,10 @@
         </Grid.ColumnDefinitions>
 
         <!--Left Side Start Menu-->
-        <Border CornerRadius="10 0 0 10"
-                BorderThickness="0">
+        <Border 
+            CornerRadius="10 0 0 10"
+            BorderThickness="0">
+            
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                     <GradientStop Color="#c4c4c4"  Offset="0"/>
@@ -36,14 +38,14 @@
             </Border.Background>
 
             <TextBlock x:Name="mainProjectName"
-                   Grid.Column="0"
-                   FontSize="80"
-                   TextAlignment="Center"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   TextWrapping="Wrap"
-                   IsEnabled="False"
-                   Style="{StaticResource BaseTextBlockStyle}">
+                Grid.Column="0"
+                FontSize="80"
+                TextAlignment="Center"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                TextWrapping="Wrap"
+                IsEnabled="False"
+                Style="{StaticResource BaseTextBlockStyle}">
                 <Run Text="Family Finance"/>
                 <LineBreak/>
                 <Run Text="Analysis"/>
@@ -53,27 +55,28 @@
 
         <!--Authorezation Side Start Menu-->
         <Border Grid.Column="1" CornerRadius="0 10 10 0">
+            
             <Border.Background>
                 <SolidColorBrush Color="#ffffff"/>
             </Border.Background>
 
             <StackPanel>
 
-                <TextBlock Text="Авторизация" 
-                           FontSize="36" 
-                           HorizontalAlignment="Center"
-                           Margin="0,105,0,0"
-                           Style="{StaticResource BaseTextBlockStyle}">
+                <TextBlock 
+                    Text="Авторизация" 
+                    FontSize="36" 
+                    HorizontalAlignment="Center"
+                    Margin="0,105,0,0"
+                    Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <Separator Margin="150,20,150,20">
-                    
-                </Separator>
+                <Separator Margin="150,20,150,20"/>
 
-                <Border CornerRadius="10" 
-                        Margin="160 10 150 0"
-                        BorderBrush="Black"
-                        BorderThickness="0" >
+                <Border 
+                    CornerRadius="10" 
+                    Margin="160 10 150 0"
+                    BorderBrush="Black"
+                    BorderThickness="0" >
 
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
@@ -83,22 +86,18 @@
                     </Border.Background>
 
                     <TextBox x:Name="textBoxLogin" 
-                             Text="{Binding Path=CurrentUser.Login, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="32" 
-                             FontFamily="Montserrat"
-                             FontWeight="Light"
-                             Background="Transparent"
-                             Foreground="#a2a2a2"
-                             BorderBrush="{x:Null}"
-                             Padding="10 3 3 0" GotFocus="Log_GotFocus"
-                             />
+                        Text="{Binding Path=CurrentUser.Login, UpdateSourceTrigger=PropertyChanged}"
+                        FontSize="32" 
+                        Padding="10 3 3 0"
+                        GotFocus="Log_GotFocus"
+                        Style="{StaticResource BaseTextBoxStyle}"/>
                 </Border>
 
                 <Border 
-                        CornerRadius="10" 
-                        Margin="160 30 150 0"
-                        BorderBrush="Black"
-                        BorderThickness="0">
+                    CornerRadius="10" 
+                    Margin="160 30 150 0"
+                    BorderBrush="Black"
+                    BorderThickness="0">
 
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
@@ -108,33 +107,32 @@
                     </Border.Background>
 
                     <PasswordBox 
-                            x:Name="passwordBox"
-                            Password="******"
-                            PasswordChar="*"
-                            FontSize="32"
-                            FontFamily="Montserrat"
-                            FontWeight="Light"
-                            Background="Transparent"
-                            Foreground="#a2a2a2"
-                            BorderBrush="{x:Null}"
-                            Padding="10 3 0 0" GotFocus="PasswordBox_GotFocus"
-                            PasswordChanged="PasswordBox_PasswordChanged">
+                        x:Name="passwordBox"
+                        Password="******"
+                        PasswordChar="*"
+                        FontSize="32"                      
+                        Padding="10 3 0 0"
+                        GotFocus="PasswordBox_GotFocus"
+                        PasswordChanged="PasswordBox_PasswordChanged"
+                        Style="{StaticResource BasePasswordBoxStyle}">
                     </PasswordBox>
 
                 </Border>
 
-                <Border CornerRadius="10" 
-                        Margin="220 40 250 0"
-                        BorderBrush="{x:Null}">
+                <Border 
+                    CornerRadius="10" 
+                    Margin="220 40 250 0"
+                    BorderBrush="{x:Null}">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
-                    <Button Content="Вход"
-                            Command="{Binding EnterUser}"                           
-                            Padding="5"  
-                            Style="{StaticResource BaseButtonStyle}">
+                    <Button 
+                        Content="Вход"                                                 
+                        Padding="5"  
+                        Style="{StaticResource BaseButtonStyle}"
+                        Command="{Binding EnterUser}">
                         <Button.CommandParameter>
                             <MultiBinding Converter="{StaticResource SimpleMultiConverter}">
                                 <Binding Path="Tag" ElementName="passwordBox"/>
@@ -142,6 +140,7 @@
                             </MultiBinding>
                         </Button.CommandParameter>
                     </Button>
+                    
                 </Border>
 
                 <TextBlock
@@ -151,25 +150,23 @@
                     TextWrapping="Wrap"
                     Foreground="DarkRed"
                     Text="{Binding Path=EnterResult, UpdateSourceTrigger=PropertyChanged}"
-                    Style="{StaticResource BaseTextBlockStyle}">
+                    Style="{StaticResource BaseTextBlockStyle}"/>
 
-                </TextBlock>
-                
-
-                <Border CornerRadius="10 0 10 0" 
-                        VerticalAlignment="Bottom"
-                        Margin="450 87 0 0"
-                        BorderBrush="{x:Null}">
+                <Border 
+                    CornerRadius="10 0 10 0" 
+                    VerticalAlignment="Bottom"
+                    Margin="450 91 0 0"
+                    BorderBrush="{x:Null}">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
                     <Button 
-                            Content="Выход"
-                            Click="ButtonExit_Click"
-                            Padding="7"
-                            Style="{StaticResource BaseButtonStyle}">
+                        Content="Выход"
+                        Click="ButtonExit_Click"
+                        Padding="7"
+                        Style="{StaticResource BaseButtonStyle}">
                     </Button>
 
                 </Border>

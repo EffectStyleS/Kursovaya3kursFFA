@@ -37,9 +37,7 @@
                     Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <Separator Margin="250,20,250,20">
-
-                </Separator>
+                <Separator Margin="250,20,250,20"/>
 
                 <ListBox 
                     ItemsSource="{Binding AllIncomes}"
@@ -58,31 +56,34 @@
                                     <ColumnDefinition Width="270"/>
                                     <ColumnDefinition Width="270"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
-                                           Grid.Column="0"
-                                           TextAlignment="Center"
-                                           FontSize="24"
-                                           Text="{Binding OnlyDate}"/>
-                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
-                                           Grid.Column="1"
-                                           TextAlignment="Center"
-                                           FontSize="24"
-                                           Text="{Binding IncomeType}"/>
-                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
-                                           Grid.Column="2"
-                                           TextAlignment="Center"
-                                           FontSize="24"
-                                           Text="{Binding Name}"/>
-                                <TextBlock Style="{StaticResource BaseTextBlockStyle}"
-                                           Grid.Column="3"
-                                           TextAlignment="Center"
-                                           FontSize="24"
-                                           Text="{Binding Value}"/>
+                                <TextBlock 
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Grid.Column="0"
+                                    TextAlignment="Center"
+                                    FontSize="24"
+                                    Text="{Binding OnlyDate}"/>
+                                <TextBlock 
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Grid.Column="1"
+                                    TextAlignment="Center"
+                                    FontSize="24"
+                                    Text="{Binding IncomeType}"/>
+                                <TextBlock 
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Grid.Column="2"
+                                    TextAlignment="Center"
+                                    FontSize="24"
+                                    Text="{Binding Name}"/>
+                                <TextBlock 
+                                    Style="{StaticResource BaseTextBlockStyle}"
+                                    Grid.Column="3"
+                                    TextAlignment="Center"
+                                    FontSize="24"
+                                    Text="{Binding Value}"/>
                             </Grid>
-
-
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+                    
                 </ListBox>
 
             </StackPanel>
@@ -123,6 +124,7 @@
                             </TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
+                    
                 </ComboBox>
 
                 <Border CornerRadius="10">
@@ -180,33 +182,29 @@
             </StackPanel>
 
             <StackPanel x:Name="stackPanelDate"
-                        Margin="0 13 0 0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Visibility="Collapsed">
+                Margin="0 13 0 0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed">
 
-                <TextBlock Text="Дата: " 
-                           FontSize="32" 
-                           HorizontalAlignment="Left"
-                           Margin="30 0 0 0"
-                           Style="{StaticResource BaseTextBlockStyle}">
-                </TextBlock>
+                <TextBlock 
+                    Text="Дата: " 
+                    FontSize="32" 
+                    HorizontalAlignment="Left"
+                    Margin="30 0 0 0"
+                    Style="{StaticResource BaseTextBlockStyle}"/>
 
                 <DatePicker 
-                            x:Name="datePicker"
-                            Margin="20 0 0 0"
-                            FontFamily="Montserrat"
-                            FontSize="28"
-                            VerticalAlignment="Center"
-                            FontWeight="Light"
-                            BorderBrush="{x:Null}"                    
-                            SelectedDate="{Binding StartDate}"
-                            DisplayDate="{Binding StartDate}"                            
-                            Width="30">
-
-                </DatePicker>
-
-
+                    x:Name="datePicker"
+                    Margin="20 0 0 0"
+                    FontFamily="Montserrat"
+                    FontSize="28"
+                    VerticalAlignment="Center"
+                    FontWeight="Light"
+                    BorderBrush="{x:Null}"                    
+                    SelectedDate="{Binding StartDate}"
+                    DisplayDate="{Binding StartDate}"                            
+                    Width="30"/>
 
                 <Border CornerRadius="10"
                         Margin="20 0 0 0">
@@ -216,11 +214,11 @@
                     </Border.Background>
 
                     <Button 
-                            Content="Далее"
-                            Padding="10 5 10 5"
-                            Command="{Binding AddIncomeDate}"
-                            Click ="ButtonAddIncomeDate_Click"
-                            Style="{StaticResource BaseButtonStyle}"/>
+                        Content="Далее"
+                        Padding="10 5 10 5"
+                        Command="{Binding AddIncomeDate}"
+                        Click ="ButtonAddIncomeDate_Click"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
 
@@ -232,94 +230,102 @@
                     </Border.Background>
 
                     <Button 
-                            Content="Отменить"
-                            Padding="10 5 10 5"
-                            Command="{Binding Cancel}"
-                            Click="ButtonCancel_Click"
-                            Style="{StaticResource BaseButtonStyle}"/>
+                        Content="Отменить"
+                        Padding="10 5 10 5"
+                        Command="{Binding Cancel}"
+                        Click="ButtonCancel_Click"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
             </StackPanel>
 
             <StackPanel x:Name="stackPanelType"
-                        Margin="0 13 0 0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Visibility="Collapsed">
+                Margin="0 13 0 0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed">
 
-                <TextBlock Text="Тип дохода: " 
-                           FontSize="32" 
-                           HorizontalAlignment="Left"
-                           Margin="30 0 0 0"
-                           Style="{StaticResource BaseTextBlockStyle}">
+                <TextBlock 
+                    Text="Тип дохода: " 
+                    FontSize="32" 
+                    HorizontalAlignment="Left"
+                    Margin="30 0 0 0"
+                    Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <ComboBox Margin="10 0 0 0"
-                          ItemsSource="{Binding IncomeTypes}"
-                          SelectedIndex="{Binding SelectedIncomeTypesId}">
+                <ComboBox 
+                    Margin="10 0 0 0"
+                    ItemsSource="{Binding IncomeTypes}"
+                    SelectedIndex="{Binding SelectedIncomeTypesId}">
 
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
-                                       Style="{StaticResource BaseTextBlockStyle}"
-                                       FontSize="28" 
-                                       HorizontalAlignment="Center">
+                            <TextBlock 
+                                Text="{Binding Name}"
+                                Style="{StaticResource BaseTextBlockStyle}"
+                                FontSize="28" 
+                                HorizontalAlignment="Center">
                             </TextBlock>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
+                    
                 </ComboBox>
 
 
-                <Border CornerRadius="10"
-                        Margin="20 0 0 0">
+                <Border 
+                    CornerRadius="10"
+                    Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
                     <Button 
-                            Content="Далее"
-                            Padding="10 5 10 5"
-                            Click="ButtonAddIncomeType_Click"
-                            Command="{Binding AddIncomeTypesId}"
-                            Style="{StaticResource BaseButtonStyle}"/>
+                        Content="Далее"
+                        Padding="10 5 10 5"
+                        Click="ButtonAddIncomeType_Click"
+                        Command="{Binding AddIncomeTypesId}"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
 
-                <Border CornerRadius="10"
-                        Margin="20 0 0 0">
+                <Border 
+                    CornerRadius="10"
+                    Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
                     <Button 
-                            Content="Отменить"
-                            Padding="10 5 10 5"
-                            Command="{Binding Cancel}"
-                            Click="ButtonCancel_Click"
-                            Style="{StaticResource BaseButtonStyle}"/>
+                        Content="Отменить"
+                        Padding="10 5 10 5"
+                        Command="{Binding Cancel}"
+                        Click="ButtonCancel_Click"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
             </StackPanel>
 
             <StackPanel x:Name="stackPanelName"
-                        Margin="0 13 0 0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Visibility="Collapsed">
+                Margin="0 13 0 0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed">
 
-                <TextBlock Text="Наименование: " 
-                           FontSize="32" 
-                           HorizontalAlignment="Left"
-                           Margin="30 0 0 0"
-                           Style="{StaticResource BaseTextBlockStyle}">
+                <TextBlock 
+                    Text="Наименование: " 
+                    FontSize="32" 
+                    HorizontalAlignment="Left"
+                    Margin="30 0 0 0"
+                    Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <Border CornerRadius="5" 
-                        BorderBrush="Black"
-                        BorderThickness="0"
-                        Margin="10 0 20 0">
+                <Border 
+                    CornerRadius="5" 
+                    BorderBrush="Black"
+                    BorderThickness="0"
+                    Margin="10 0 20 0">
 
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
@@ -327,23 +333,21 @@
                             <GradientStop Color="#ffffff"  Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
+                    
                     <TextBox 
                         Padding="10 0 3 0"
                         FontSize="32"
                         Width="150"
                         MaxWidth="200"
-                        FontFamily="Montserrat"
-                        FontWeight="Light"
-                        Background="Transparent"
-                        BorderBrush="{x:Null}"
+                        Foreground="Black"
                         Text="{Binding SelectedIncome.Name, UpdateSourceTrigger=PropertyChanged}"
-                        >
+                        Style="{StaticResource BaseTextBoxStyle}"/>
 
-                    </TextBox>
                 </Border>
 
-                <Border CornerRadius="10"
-                        Margin="20 0 0 0">
+                <Border 
+                    CornerRadius="10"
+                    Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
@@ -358,40 +362,43 @@
 
                 </Border>
 
-                <Border CornerRadius="10"
-                        Margin="20 0 0 0">
+                <Border 
+                    CornerRadius="10"
+                    Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
                     <Button 
-                            Content="Отменить"
-                            Padding="10 5 10 5"
-                            Command="{Binding Cancel}"
-                            Click="ButtonCancel_Click"
-                            Style="{StaticResource BaseButtonStyle}"/>
+                        Content="Отменить"
+                        Padding="10 5 10 5"
+                        Command="{Binding Cancel}"
+                        Click="ButtonCancel_Click"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
+                
             </StackPanel>
 
             <StackPanel x:Name="stackPanelValue"
-                        Margin="0 13 0 0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Visibility="Collapsed">
+                Margin="0 13 0 0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed">
 
-                <TextBlock Text="Сумма: " 
-                           FontSize="32" 
-                           HorizontalAlignment="Left"
-                           Margin="30 0 0 0"
-                           Style="{StaticResource BaseTextBlockStyle}">
-                </TextBlock>
+                <TextBlock 
+                    Text="Сумма: " 
+                    FontSize="32" 
+                    HorizontalAlignment="Left"
+                    Margin="30 0 0 0"
+                    Style="{StaticResource BaseTextBlockStyle}"/>
 
-                <Border CornerRadius="5" 
-                        BorderBrush="Black"
-                        BorderThickness="0"
-                        Margin="10 0 20 0">
+                <Border 
+                    CornerRadius="5" 
+                    BorderBrush="Black"
+                    BorderThickness="0"
+                    Margin="10 0 20 0">
 
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0.5">
@@ -399,53 +406,54 @@
                             <GradientStop Color="#ffffff"  Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
+
                     <TextBox x:Name="numberTextBox"
                         Width="150"
                         PreviewTextInput="NumberValidationTextBox"
                         Text="{Binding SelectedIncome.Value, UpdateSourceTrigger=PropertyChanged}"
                         Padding="10 0 3 0"
                         FontSize="32"
-                        MaxWidth="200"
-                        FontFamily="Montserrat"
-                        FontWeight="Light"
-                        Background="Transparent"
-                        BorderBrush="{x:Null}">
+                        MaxWidth="200"   
+                        Foreground="Black"
+                        Style="{StaticResource BaseTextBoxStyle}"/>
 
-                    </TextBox>
                 </Border>
 
-                <Border CornerRadius="10"
-                        Margin="20 0 0 0">
+                <Border 
+                    CornerRadius="10"
+                    Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
                     <Button 
-                            Content="Сохранить"
-                            Padding="10 5 10 5"
-                            Click="ButtonCancel_Click"
-                            Command="{Binding AddIncomeValueAndSave}"
-                            Style="{StaticResource BaseButtonStyle}"/>
+                        Content="Сохранить"
+                        Padding="10 5 10 5"
+                        Click="ButtonCancel_Click"
+                        Command="{Binding AddIncomeValueAndSave}"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
 
-                <Border CornerRadius="10"
-                        Margin="20 0 0 0">
+                <Border 
+                    CornerRadius="10"
+                    Margin="20 0 0 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
-                    <Button Content="Отменить"
-                            Padding="10 5 10 5"
-                            Command="{Binding Cancel}"
-                            Click="ButtonCancel_Click"
-                            Style="{StaticResource BaseButtonStyle}"/>
+                    <Button 
+                        Content="Отменить"
+                        Padding="10 5 10 5"
+                        Command="{Binding Cancel}"
+                        Click="ButtonCancel_Click"
+                        Style="{StaticResource BaseButtonStyle}"/>
 
                 </Border>
+                
             </StackPanel>
-
 
             <Border Margin="950 34 0 0"
                     CornerRadius="10 0 10 0">
@@ -455,11 +463,11 @@
                 </Border.Background>
 
                 <Button 
-                        Content="Выйти"
-                        Padding="15 10 15 10"
-                        Command="{Binding ToMainMenu}"
-                        CommandParameter="{Binding ElementName=incomes}"
-                        Style="{StaticResource BaseButtonStyle}">
+                    Content="Выйти"
+                    Padding="15 10 15 10"
+                    Command="{Binding ToMainMenu}"
+                    CommandParameter="{Binding ElementName=incomes}"
+                    Style="{StaticResource BaseButtonStyle}">
                 </Button>
 
             </Border>

@@ -15,7 +15,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 {
     public class PlannedExpensesViewModel : ViewModelBase
     {
-        //static fields
+        //static properties
         public static PlannedExpensesViewModel Instance { get; } = new PlannedExpensesViewModel();
 
         //events
@@ -27,7 +27,6 @@ namespace Kursovaya_KPO_interface.ViewModel
         private IDbCrud _dbOperations;
         private List<PlannedExpensesModel> _plannedExpenses;
         private List<ExpenseTypesModel> _expenseTypes;
-        //private decimal? _sumOfAllPlannedExpenses;
         private IPlannedExpensesService _plannedExpensesService;
 
         //ctors
@@ -75,6 +74,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             }
         }       
 
+        //commands regions
         #region ToBudgetMenu
 
         RelayCommand _toBudgetMenu;

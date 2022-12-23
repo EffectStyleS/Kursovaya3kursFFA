@@ -18,22 +18,21 @@
 
             <StackPanel>
 
-                <TextBlock Text="Family Finance Analysis" 
-                           FontSize="40" 
-                           HorizontalAlignment="Center"
-                           Style="{StaticResource BaseTextBlockStyle}">
+                <TextBlock 
+                    Text="Family Finance Analysis" 
+                    FontSize="40" 
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <TextBlock Text="Запланированные расходы" 
-                           FontSize="36" 
-                           HorizontalAlignment="Center"
-                           Style="{StaticResource BaseTextBlockStyle}">
+                <TextBlock 
+                    Text="Запланированные расходы" 
+                    FontSize="36" 
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource BaseTextBlockStyle}">
                 </TextBlock>
 
-                <Separator Margin="250,20,250,20">
-
-                </Separator>
-
+                <Separator Margin="250,20,250,20"/>
 
                 <ListBox 
                     ItemsSource="{Binding PlannedExpenses}"
@@ -43,18 +42,20 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
+                            
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
+                                
                                 <TextBlock
-                                        Grid.Column="0"
-                                        Style="{StaticResource BaseTextBlockStyle}"   
-                                        TextAlignment="Right"
-                                        Width="550"
-                                        FontSize="24"
-                                        Text="{Binding ExpenseType}"/>
+                                    Grid.Column="0"
+                                    Style="{StaticResource BaseTextBlockStyle}"   
+                                    TextAlignment="Right"
+                                    Width="550"
+                                    FontSize="24"
+                                    Text="{Binding ExpenseType}"/>
                                 <Border 
                                     Grid.Column="1"
                                     CornerRadius="5" 
@@ -68,46 +69,49 @@
                                             <GradientStop Color="#f4f4f4"  Offset="1"/>
                                         </LinearGradientBrush>
                                     </Border.Background>
+                                    
                                     <TextBox
                                         Margin="5 0 0 0"                                        
                                         TextAlignment="Left"
                                         FontSize="24"
                                         Width="400"
-                                        FontFamily="Montserrat"
-                                        FontWeight="Light"
-                                        Background="Transparent"
-                                        BorderBrush="{x:Null}"
+                                        Foreground="Black"
+                                        Style="{StaticResource BaseTextBoxStyle}"
                                         PreviewTextInput="NumberValidationTextBox"
                                         Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Border>
+                                
                             </Grid>
+                            
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+                    
                 </ListBox>
 
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
-                        Margin="0 50 0 0">
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="0 50 0 0">
 
-                <Border 
-                        CornerRadius="0 10 0 10">
+                <Border CornerRadius="0 10 0 10">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>
                     </Border.Background>
 
                     <Button 
-                            Content="Сохранить"
-                            Padding="30 15 30 14"
-                            Command="{Binding SavePlannedExpenses}"
-                            Style="{StaticResource BaseButtonStyle}">
+                        Content="Сохранить"
+                        Padding="30 15 30 14"
+                        Command="{Binding SavePlannedExpenses}"
+                        Style="{StaticResource BaseButtonStyle}">
                     </Button>
 
                 </Border>
 
-                <Border Margin="706 0 0 0"
-                        CornerRadius="10 0 10 0">
+                <Border 
+                    Margin="706 0 0 0"
+                    CornerRadius="10 0 10 0">
 
                     <Border.Background>
                         <SolidColorBrush Color="#e4e4e4"/>

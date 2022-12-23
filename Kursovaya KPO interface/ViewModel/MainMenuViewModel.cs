@@ -11,12 +11,25 @@ namespace Kursovaya_KPO_interface.ViewModel
 {
     public class MainMenuViewModel : ViewModelBase
     {
-        private string _greeting;
-        private Uri _startMenuUri;
+        //static properties
         public static Uri MainMenuUri { get; set; }
         public static Uri IncomesUri { get; set; }
         public static Uri ExpensesUri { get; set; }
         public static Uri BudgetMenuUri { get; set; }
+
+        //private fields
+        private string _greeting;
+        private Uri _startMenuUri;
+             
+        //ctors
+        public MainMenuViewModel()
+        {
+            Greeting      = StartMenuViewModel.SelectedUser.Name;
+            _startMenuUri = StartMenuViewModel.StartMenuUri;
+            MainMenuUri   = StartMenuViewModel.MainMenuUri;
+        }
+
+        //public properties
         public string Greeting
         {
             get
@@ -32,13 +45,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             }
         }
 
-        public MainMenuViewModel()
-        {
-            Greeting      = StartMenuViewModel.SelectedUser.Name;
-            _startMenuUri = StartMenuViewModel.StartMenuUri;
-            MainMenuUri   = StartMenuViewModel.MainMenuUri;
-        }
-
+        //commands regions
         #region ToBudgetMenu
 
         RelayCommand _toBudgetMenu;

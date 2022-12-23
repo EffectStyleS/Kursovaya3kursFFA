@@ -20,7 +20,7 @@ namespace Kursovaya_KPO_interface.ViewModel
         private delegate void FillPlannedExpensesAndIncomes();
         private event FillPlannedExpensesAndIncomes OnSelectingBudget;
 
-        //static fields
+        //static properties
         public static BudgetMenuViewModel Instance{ get; } = new BudgetMenuViewModel();
         public static Uri BudgetMenuUri { get; set; }
         public static Uri PlannedExpensesUri { get; set; }
@@ -353,10 +353,9 @@ namespace Kursovaya_KPO_interface.ViewModel
             
         }
 
-
         //public methods
 
-        //events handlers
+            //events handlers
         public void TakePlannedExpenses(List<PlannedExpensesModel> plannedExpenses)
         {
             PlannedExpenses = plannedExpenses;
@@ -666,8 +665,6 @@ namespace Kursovaya_KPO_interface.ViewModel
         }
         #endregion
 
-
-
         #region Cancel
 
         RelayCommand _cancel;
@@ -693,7 +690,6 @@ namespace Kursovaya_KPO_interface.ViewModel
             return true;
         }
         #endregion
-
 
     }
 }

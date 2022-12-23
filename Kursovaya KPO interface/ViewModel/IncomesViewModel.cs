@@ -16,7 +16,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 {
     public class IncomesViewModel : ViewModelBase
     {
-        //static fields 
+        //static properties 
         public static Uri IncomesUri { get; set; }
 
         //private fields
@@ -194,7 +194,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             set
             {
                 _selectedUserId = value;
-                if (value > 0)
+                if (value > -1)
                 {
                     ReadableUser = Users[SelectedUserId];
                     LoadUserIncomes();
@@ -203,7 +203,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             }
         }
 
-        //public methods
+        //private methods
         private void LoadUserIncomes()
         {
             if (_user.Role == 1)
@@ -274,7 +274,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteDeleteIncomeCommand(object parameter)
         {
-            if (SelectedIncome != null && ReadableUser.Id != _user.Id)
+            if (_user.Role == 0 && ReadableUser.Id != _user.Id)
+                return false;
+            if (SelectedIncome == null || SelectedIncome.Id == 0)
                 return false;
             return true;
         }
@@ -334,7 +336,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteUpdateIncomeCommand(object parameter)
         {
-            if (SelectedIncome != null && ReadableUser.Id != _user.Id)
+            if (_user.Role == 0 && ReadableUser.Id != _user.Id)
+                return false;
+            if (SelectedIncome == null || SelectedIncome.Id == 0)
                 return false;
             return true;
         }

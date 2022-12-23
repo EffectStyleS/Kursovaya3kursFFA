@@ -16,7 +16,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 {
     public class ExpensesViewModel : ViewModelBase
     {
-        //static fields 
+        //static properties 
         public static Uri ExpensesUri { get; set; }
 
         //private fields
@@ -396,7 +396,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteDeleteExpenseCommand(object parameter)
         {
-            if (SelectedExpense != null && ReadableUser.Id != _user.Id)
+            if (_user.Role == 0 && ReadableUser.Id != _user.Id)
+                return false;
+            if (SelectedExpense == null || SelectedExpense.Id == 0)
                 return false;
             return true;
         }
@@ -456,7 +458,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public bool CanExecuteUpdateExpenseCommand(object parameter)
         {
-            if (SelectedExpense != null && ReadableUser.Id != _user.Id)
+            if (_user.Role == 0 && ReadableUser.Id != _user.Id)
+                return false;
+            if (SelectedExpense == null || SelectedExpense.Id == 0)
                 return false;
             return true;
         }
