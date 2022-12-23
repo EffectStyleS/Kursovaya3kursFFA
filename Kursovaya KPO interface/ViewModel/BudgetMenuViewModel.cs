@@ -20,6 +20,12 @@ namespace Kursovaya_KPO_interface.ViewModel
         private delegate void FillPlannedExpensesAndIncomes();
         private event FillPlannedExpensesAndIncomes OnSelectingBudget;
 
+        public delegate void NewBudgetCreatingForPlannedExpenses(List<PlannedExpensesModel> plannedExpenses);
+        public event NewBudgetCreatingForPlannedExpenses OnCreatingFPE;
+
+        public delegate void NewBudgetCreatingForPlannedIncomes(List<PlannedIncomesModel> plannedIncomes);
+        public event NewBudgetCreatingForPlannedIncomes OnCreatingFPI;
+
         //static properties
         public static BudgetMenuViewModel Instance{ get; } = new BudgetMenuViewModel();
         public static Uri BudgetMenuUri { get; set; }
@@ -464,6 +470,7 @@ namespace Kursovaya_KPO_interface.ViewModel
         {
             _mode = 1;
             _user = StartMenuViewModel.SelectedUser;
+            OnPropertyChanged(nameof(AdminMode));
 
             NewBudget = new BudgetModel()
             {
@@ -472,6 +479,9 @@ namespace Kursovaya_KPO_interface.ViewModel
 
             PlannedExpenses = null;
             PlannedIncomes = null;
+
+            SaveResult = "";
+            NewBudget = null;
         }
 
         public bool CanExecuteCreateBudgetCommand(object parameter)
@@ -496,6 +506,7 @@ namespace Kursovaya_KPO_interface.ViewModel
         public void ExecuteReadBudgetsCommand(object parameter)
         {
             _user = StartMenuViewModel.SelectedUser;
+            OnPropertyChanged(nameof(AdminMode));
 
             PlannedExpenses = null;
             PlannedIncomes = null;
@@ -508,7 +519,6 @@ namespace Kursovaya_KPO_interface.ViewModel
                 UserBudgets = _dbOperations.GetAllUserBudgets(_user.Id);
                 SelectedBudgetId = 0;
             }
-
 
             _mode = 2;           
         }
@@ -588,6 +598,8 @@ namespace Kursovaya_KPO_interface.ViewModel
                 NewBudget = null;
                 PlannedExpenses = null;
                 PlannedIncomes = null;
+                OnCreatingFPE(PlannedExpenses);
+                OnCreatingFPI(PlannedIncomes);
             }
             else if(PlannedIncomes == null)
             {
@@ -648,6 +660,8 @@ namespace Kursovaya_KPO_interface.ViewModel
                 NewBudget = null;
                 PlannedExpenses = null;
                 PlannedIncomes = null;
+                OnCreatingFPE(PlannedExpenses);
+                OnCreatingFPI(PlannedIncomes);
             }
             else if (PlannedIncomes == null)
             {
@@ -683,6 +697,8 @@ namespace Kursovaya_KPO_interface.ViewModel
             NewBudget = null;
             PlannedExpenses = null;
             PlannedIncomes = null;
+            OnCreatingFPE(PlannedExpenses);
+            OnCreatingFPI(PlannedIncomes);
         }
 
         public bool CanExecuteCancelCommand(object parameter)

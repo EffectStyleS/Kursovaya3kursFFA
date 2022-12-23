@@ -34,6 +34,7 @@ namespace Kursovaya_KPO_interface.ViewModel
             _dbOperations = App.MyMainWindow.CrudDb;
             _budgetMenuUri = BudgetMenuViewModel.BudgetMenuUri;
             _incomeTypes = _dbOperations.GetAllIncomeTypes();
+
         }
 
         //public properties
@@ -72,6 +73,12 @@ namespace Kursovaya_KPO_interface.ViewModel
             }
         }
 
+        //event handlers
+        public void TakePlannedIncomes(List<PlannedIncomesModel> plannedIncomes)
+        {
+            PlannedIncomes = plannedIncomes;
+        }
+
         //commands regions
         #region ToBudgetMenu
 
@@ -88,6 +95,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public void ExecuteToBudgetMenuCommand(object parameter)
         {
+            BudgetMenuViewModel.Instance.OnCreatingFPI += TakePlannedIncomes;
             Navigator.Page = parameter as Page;
             if (_budgetMenuUri == null)
                 _budgetMenuUri = new Uri("View/BudgetMenu.xaml", UriKind.Relative);

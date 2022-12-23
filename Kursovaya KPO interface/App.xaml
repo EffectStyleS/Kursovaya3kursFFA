@@ -111,7 +111,6 @@
             </Style.Setters>
 
         </Style>
-
         
         <!--ComboBoxStyle-->
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
@@ -276,6 +275,7 @@
             </Setter>
         </Style>
 
+
         <Style x:Key="{x:Type ListBoxItem}" TargetType="{x:Type ListBoxItem}">
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -300,8 +300,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
 
     </Application.Resources>
            

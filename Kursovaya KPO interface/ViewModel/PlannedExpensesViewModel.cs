@@ -36,6 +36,8 @@ namespace Kursovaya_KPO_interface.ViewModel
             _budgetMenuUri          = BudgetMenuViewModel.BudgetMenuUri;
             _expenseTypes           = _dbOperations.GetAllExpenseTypes();
             _plannedExpensesService = App.MyMainWindow.PlannedExpensesService;
+
+
         }
 
         //public properties
@@ -72,7 +74,13 @@ namespace Kursovaya_KPO_interface.ViewModel
                 _plannedExpenses = value;                
                 OnPropertyChanged(nameof(PlannedExpenses));
             }
-        }       
+        }
+
+        //event handlers
+        public void TakePlannedExpenses(List<PlannedExpensesModel> plannedExpenses)
+        {
+            PlannedExpenses = plannedExpenses;
+        }
 
         //commands regions
         #region ToBudgetMenu
@@ -90,6 +98,7 @@ namespace Kursovaya_KPO_interface.ViewModel
 
         public void ExecuteToBudgetMenuCommand(object parameter)
         {
+            BudgetMenuViewModel.Instance.OnCreatingFPE += TakePlannedExpenses;
             Navigator.Page = parameter as Page;
             if (_budgetMenuUri == null)
                 _budgetMenuUri = new Uri("View/BudgetMenu.xaml", UriKind.Relative);

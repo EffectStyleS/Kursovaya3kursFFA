@@ -43,7 +43,7 @@ namespace Kursovaya_KPO_interface.Model.Services
             List<List<decimal?>> differences = new List<List<decimal?>>();
 
             List<ExpenseTypesModel> expenseTypes = _db.ExpenseTypes.GetAll().Select(e => new ExpenseTypesModel(e)).ToList();
-            List<List<ExpenseModel>> expensesByType = new List<List<ExpenseModel>>();            
+            List<List<ExpenseModel>> expensesByType = new List<List<ExpenseModel>>();
             List<decimal?> AllSumOfExpensesValues = new List<decimal?>();
 
             for(int i = 0; i < expenseTypes.Count; i++)
